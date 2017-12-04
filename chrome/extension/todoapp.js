@@ -11,6 +11,6 @@ console.log('in todoapp.js');
 
   ReactDOM.render(
     <Root store={createStore({})} />,
-    document.querySelector('#root')
+    document.querySelector('#yt-playlists')
   );
 // });
