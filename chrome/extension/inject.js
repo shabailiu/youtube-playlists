@@ -40,7 +40,11 @@ const injectElementIntoPage = () => {
   reactRoot.id = 'yt-playlists';
 
   const eltToInject = document.querySelector('#browse-items-primary > ol'); //TODO put this in config
-  eltToInject.insertBefore(reactRoot, eltToInject.firstChild);
+  if (eltToInject) {
+    eltToInject.insertBefore(reactRoot, eltToInject.firstChild);
+  } else {
+    document.body.appendChild(reactRoot);
+  }
 };
 
 const retrieveStorage = () => {

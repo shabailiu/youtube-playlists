@@ -5,7 +5,7 @@ import PlaylistContainer from '../components/PlaylistContainer/PlaylistContainer
 import _ from 'lodash';
 import './App.less';
 
-const videoShape = {
+const videoShape = () => ({
   videoTitle: PropTypes.string.isRequired,
   videoUrl: PropTypes.string.isRequired,
   thumbnailImg: PropTypes.string.isRequired,
@@ -13,13 +13,13 @@ const videoShape = {
   channelUrl: PropTypes.string.isRequired,
   views: PropTypes.number.isRequired,
   timestamp: PropTypes.string.isRequired
-};
+});
 
-const playlistShape = {
+const playlistShape = () => ({
   id: PropTypes.string.isRequired,
   url: PropTypes.string.isRequired,
   videos: PropTypes.arrayOf(videoShape)
-};
+});
 
 export class App extends Component {
 
@@ -33,7 +33,7 @@ export class App extends Component {
 
     return (
       <div>
-        <h1>helloasdf</h1>
+        <h1>hiasdf</h1>
         <PlaylistContainer
           videos={videos}
         />
