@@ -1,20 +1,18 @@
 {
-  "name": "react-chrome-extension-boilerplate",
-  "version": "0.9.0",
-  "description": "Boilerplate for Chrome extension React.js project",
+  "name": "youtube-playlist-subscriber",
+  "version": "0.0.1",
+  "description": "YouTube playlist subscription Chrome extension",
   "scripts": {
     "dev": "node scripts/dev",
     "build": "node scripts/build",
     "compress": "node scripts/compress",
     "compress-keygen": "crx keygen",
     "clean": "rimraf build/ dev/ *.zip *.crx",
-    "lint": "eslint app chrome test scripts webpack/*.js",
-    "test-e2e": "cross-env NODE_ENV=test mocha -r ./test/setup-app test/e2e",
-    "test": "cross-env NODE_ENV=test mocha -r ./test/setup-app test/app"
+    "lint": "eslint app chrome test scripts webpack/*.js"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/jhen0409/react-chrome-extension-boilerplate.git"
+    "url": "https://github.paypal.com/shliu/youtube-playlist-subscriber.git"
   },
   "keywords": [
     "chrome",
@@ -25,7 +23,7 @@
     "webpack",
     "boilerplate"
   ],
-  "author": "Jhen <developer@jhen.me>",
+  "author": "Shabai Liu <shliu@paypal.com>",
   "license": "MIT",
   "devDependencies": {
     "babel-core": "^6.3.15",
@@ -60,7 +58,6 @@
     "pug-cli": "^1.0.0-alpha6",
     "react-addons-test-utils": "^15.0.2",
     "rimraf": "^2.4.3",
-    "selenium-webdriver": "^2.47.0",
     "shelljs": "^0.7.0",
     "sinon": "^1.17.1",
     "style-loader": "^0.13.1",

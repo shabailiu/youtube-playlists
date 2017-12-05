@@ -3,12 +3,11 @@ import ReactDOM from 'react-dom';
 import Root from '../../app/containers/Root';
 
 const mockState = {
-  playlists: [
-    {
-      id: 1,
+  playlists: {
+    1: {
       url: 'https://www.youtube.com/feeds/videos.xml?playlist_id=PL96C35uN7xGI9HGKHsArwxiOejecVyNem'
     }
-  ]
+  }
 };
 
 window.addEventListener('load', async () => {
