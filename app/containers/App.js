@@ -1,31 +1,30 @@
 import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import * as TodoActions from '../actions/todos';
-import style from './App.less';
+import './App.less';
 
-@connect(
-  state => ({
-    todos: state.todos
-  }),
-  dispatch => ({
-    actions: bindActionCreators(TodoActions, dispatch)
-  })
-)
-export default class App extends Component {
+export class App extends Component {
 
   static propTypes = {
-    todos: PropTypes.array.isRequired,
-    actions: PropTypes.object.isRequired
   };
 
   render() {
-    const { todos, actions } = this.props;
+    const { } = this.props;
 
     return (
-      <div className={style.normal}>
-        <h1>hello</h1>
+      <div>
+        <h1>helloasdf</h1>
       </div>
     );
   }
 }
+
+const mapStateToProps = state => ({
+
+});
+
+const mapDispatchToProps = dispatch => ({
+
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
