@@ -3,11 +3,23 @@ import ReactDOM from 'react-dom';
 import Root from '../../app/containers/Root';
 
 const mockState = {
-  playlists: {
-    1: {
-      url: 'https://www.youtube.com/feeds/videos.xml?playlist_id=PL96C35uN7xGI9HGKHsArwxiOejecVyNem'
+  playlists: [
+    {
+      id: '1',
+      url: 'https://www.youtube.com/feeds/videos.xml?playlist_id=PL96C35uN7xGI9HGKHsArwxiOejecVyNem',
+      videos: [
+        {
+          videoTitle: 'Why Hold Music Sounds Worse Now',
+          videoUrl: 'https://www.youtube.com/v/w2A8q3XIhu0?version=3',
+          thumbnailImg: 'https://i4.ytimg.com/vi/w2A8q3XIhu0/hqdefault.jpg',
+          channelName: 'Tom Scott',
+          channelUrl: 'https://www.youtube.com/channel/UCBa659QWEk1AI4Tg--mrJ2A',
+          views: 559260,
+          timestamp: '2017-11-27T16:00:04+00:00'
+        }
+      ]
     }
-  }
+  ],
 };
 
 window.addEventListener('load', async () => {
@@ -32,6 +44,7 @@ const injectElementIntoPage = () => {
 };
 
 const retrieveStorage = () => {
+  //TODO think about caching the playlists once they're retrieved from RSS feed
   return new Promise((resolve, reject) => {
     chrome.storage.sync.get('yt-playlists', obj => resolve(obj));
   });
