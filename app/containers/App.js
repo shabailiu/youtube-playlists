@@ -24,7 +24,7 @@ export default class App extends Component {
 
     return (
       <div className={style.normal}>
-        <h1>helasdflo</h1>
+        <h1>hello</h1>
       </div>
     );
   }

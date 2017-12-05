@@ -42,4 +42,5 @@ chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
   }
 
   loadScript('inject', tabId, () => console.log('load inject bundle success!'));
+  // loadScript('todoapp', tabId, () => console.log('load todoapp bundle success!'));
 });

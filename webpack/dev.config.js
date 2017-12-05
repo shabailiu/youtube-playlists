@@ -12,6 +12,7 @@ const baseDevConfig = () => ({
   entry: {
     todoapp: [customPath, hotScript, path.join(__dirname, '../chrome/extension/todoapp')],
     background: [customPath, hotScript, path.join(__dirname, '../chrome/extension/background')],
+    inject: [customPath, hotScript, path.join(__dirname, '../chrome/extension/inject')]
   },
   devMiddleware: {
     publicPath: `http://${host}:${port}/js`,
@@ -75,17 +76,17 @@ const baseDevConfig = () => ({
 });
 
 const injectPageConfig = baseDevConfig();
-injectPageConfig.entry = [
-  customPath,
-  path.join(__dirname, '../chrome/extension/inject')
-];
-delete injectPageConfig.hotMiddleware;
-delete injectPageConfig.module.loaders[0].query;
-injectPageConfig.plugins.shift(); // remove HotModuleReplacementPlugin
-injectPageConfig.output = {
-  path: path.join(__dirname, '../dev/js'),
-  filename: 'inject.bundle.js',
-};
+// injectPageConfig.entry = [
+//   customPath,
+//   path.join(__dirname, '../chrome/extension/inject')
+// ];
+// delete injectPageConfig.hotMiddleware;
+// delete injectPageConfig.module.loaders[0].query;
+// injectPageConfig.plugins.shift(); // remove HotModuleReplacementPlugin
+// injectPageConfig.output = {
+//   path: path.join(__dirname, '../dev/js'),
+//   filename: 'inject.bundle.js',
+// };
 const appConfig = baseDevConfig();
 
 module.exports = [
