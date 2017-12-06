@@ -3,10 +3,10 @@ import ReactDOM from 'react-dom';
 import Root, { TYPE } from '../../app/containers/Root';
 
 const mockState = {
-  playlists: [
-    {
-      id: 'PL96C35uN7xGI9HGKHsArwxiOejecVyNem',
+  playlists: {
+    'PL96C35uN7xGI9HGKHsArwxiOejecVyNem': {
       url: 'https://www.youtube.com/feeds/videos.xml?playlist_id=PL96C35uN7xGI9HGKHsArwxiOejecVyNem',
+      channelId: 'UCBa659QWEk1AI4Tg--mrJ2A',
       videos: [
         {
           videoTitle: 'Why Hold Music Sounds Worse Now',
@@ -19,7 +19,7 @@ const mockState = {
         }
       ]
     }
-  ],
+  },
 };
 
 window.addEventListener('load', async () => {

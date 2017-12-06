@@ -1,9 +1,9 @@
-import React, { Component, PropTypes } from 'react';
-import { bindActionCreators } from 'redux';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import VideoDisplay from '../components/VideoDisplay/VideoDisplay';
 import _ from 'lodash';
-import './PlaylistContainer.less';
+import SubscriptionButton from '../components/SubscriptionButton/SubscriptionButton';
+import { isSubscribedPlaylist } from '../utils/playlists';
 
 const videoShape = {
   videoTitle: PropTypes.string.isRequired,
@@ -21,23 +21,19 @@ const playlistShape = {
   videos: PropTypes.arrayOf(videoShape)
 };
 
-export class PlaylistContainer extends Component {
-
+export class SubscriptionButtonContainer extends Component {
   static propTypes = {
-    playlists: PropTypes.objectOf(playlistShape).isRequired
+    playlists: PropTypes.objectOf(() => playlistShape).isRequired,
+
+    // Passed in props
+    playlistId: PropTypes.string.isRequired
   };
 
   render() {
-    const { playlists } = this.props;
-    const videos = playlists.map(playlist => playlist.videos).reduce((acc, curr) => acc.concat(curr));
+    const { playlists, playlistId } = this.props;
 
     return (
-      <div>
-        <h1>hiasdf</h1>
-        <VideoDisplay
-          videos={videos}
-        />
-      </div>
+      <SubscriptionButton isSubscribed={isSubscribedPlaylist(playlistId, playlists)} />
     );
   }
 }
@@ -50,4 +46,4 @@ const mapDispatchToProps = dispatch => ({
 
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(PlaylistContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(SubscriptionButtonContainer);

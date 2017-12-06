@@ -25,3 +25,7 @@ export async function parseRSSFeeds(feeds) {
 
   return parsedXml;
 }
+
+export function isSubscribedPlaylist(playlistId, playlists) {
+  return !!playlists[playlistId];
+}
