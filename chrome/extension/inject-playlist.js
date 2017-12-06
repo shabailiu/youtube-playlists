@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Root, { TYPE } from '../../app/containers/Root';
-import { retrieveStorage } from '../../app/utils/storage'; //TODO move util
+import { retrieveStorage, saveStorage } from '../../app/utils/storage';
+import throttle from 'lodash/throttle';
 
 const mockState = {
   playlists: {
@@ -25,14 +26,19 @@ const mockState = {
 
 window.addEventListener('load', async () => {
   injectElementIntoPage();
-  const state = await retrieveStorage();
-  const initialState = JSON.parse(state || '{}');
+  const initialState = await retrieveStorage();
   // const initialState = mockState;
   const createStore = require('../../app/store/configureStore');
+  const store = createStore(initialState);
+
+  store.subscribe(throttle(async () => {
+    await saveStorage(store.getState());
+    console.log('Saved storage to Chrome');
+  }, 1000));
 
   ReactDOM.render(
     <Root
-      store={createStore(initialState)}
+      store={store}
       type={TYPE.PLAYLIST_CONTAINER}
     />,
     document.querySelector('#yt-playlists')

@@ -4,23 +4,7 @@ import { connect } from 'react-redux';
 import VideoDisplay from '../components/VideoDisplay/VideoDisplay';
 import _ from 'lodash';
 import './PlaylistContainer.less';
-
-const videoShape = {
-  videoTitle: PropTypes.string.isRequired,
-  videoUrl: PropTypes.string.isRequired,
-  thumbnailImg: PropTypes.string.isRequired,
-  channelName: PropTypes.string.isRequired,
-  channelUrl: PropTypes.string.isRequired,
-  views: PropTypes.number.isRequired,
-  timestamp: PropTypes.string.isRequired
-};
-
-const playlistShape = {
-  id: PropTypes.string.isRequired,
-  feedUrl: PropTypes.string.isRequired,
-  playlistUrl: PropTypes.string.isRequired,
-  videos: PropTypes.arrayOf(videoShape)
-};
+import { playlistShape } from '../constants/PropTypeValidation';
 
 export class PlaylistContainer extends Component {
 
@@ -30,14 +14,16 @@ export class PlaylistContainer extends Component {
 
   render() {
     const { playlists } = this.props;
-    const videos = playlists.map(playlist => playlist.videos).reduce((acc, curr) => acc.concat(curr));
+    const videos = Object.values(playlists).map(playlist => playlist.videos).reduce((acc, curr) => acc && acc.concat(curr));
 
     return (
       <div>
         <h1>hiasdf</h1>
-        <VideoDisplay
-          videos={videos}
-        />
+        {videos && (
+          <VideoDisplay
+            videos={videos}
+          />
+        )}
       </div>
     );
   }

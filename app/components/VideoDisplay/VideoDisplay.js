@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import VideoCard from '../VideoGridCard/VideoGridCard';
+import { videoShape } from '../../constants/PropTypeValidation';
 
 export class VideoDisplay extends Component {
-  static propTypes = {};
+  static propTypes = {
+    videos: PropTypes.arrayOf(videoShape)
+  };
 
   render() {
     const { videos } = this.props;

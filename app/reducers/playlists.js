@@ -1,4 +1,4 @@
-import * as PlaylistAction from '../constants/playlists';
+import * as PlaylistAction from '../constants/PropTypeValidation';
 import * as SubscriptionAction from '../constants/SubscriptionConstants';
 
 export default (state = {}, action) => {
