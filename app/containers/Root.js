@@ -10,7 +10,8 @@ export const TYPE = {
 
 export default class Root extends Component {
   static propTypes = {
-    store: PropTypes.object.isRequired
+    store: PropTypes.object.isRequired,
+    type: PropTypes.oneOf(Object.values(TYPE)).isRequired
   };
 
   render() {

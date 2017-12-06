@@ -26,6 +26,7 @@ promisifyAll(chrome, [
 ]);
 promisifyAll(chrome.storage, [
   'local',
+  'sync'
 ]);
 
 require('./background/contextMenus');

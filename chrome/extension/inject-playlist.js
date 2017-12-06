@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Root, { TYPE } from '../../app/containers/Root';
+import { retrieveStorage } from '../../app/utils/storage'; //TODO move util
 
 const mockState = {
   playlists: {
@@ -24,9 +25,9 @@ const mockState = {
 
 window.addEventListener('load', async () => {
   injectElementIntoPage();
-  // const state = await retrieveStorage();
-  // const initialState = JSON.parse(state || '{}');
-  const initialState = mockState;
+  const state = await retrieveStorage();
+  const initialState = JSON.parse(state || '{}');
+  // const initialState = mockState;
   const createStore = require('../../app/store/configureStore');
 
   ReactDOM.render(
@@ -48,11 +49,4 @@ const injectElementIntoPage = () => {
   } else {
     document.body.appendChild(reactRoot);
   }
-};
-
-const retrieveStorage = () => {
-  //TODO think about caching the playlists once they're retrieved from RSS feed
-  return new Promise((resolve, reject) => {
-    chrome.storage.sync.get('yt-playlists', obj => resolve(obj));
-  });
 };

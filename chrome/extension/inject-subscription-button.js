@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Root, { TYPE } from '../../app/containers/Root';
+import { retrieveStorage, saveStorage } from '../../app/utils/storage';
+import throttle from 'lodash/throttle';
 
 const mockState = {
   playlists: {
@@ -24,16 +26,22 @@ const mockState = {
 
 window.addEventListener('load', async () => {
   injectElementIntoPage();
-  // const state = await retrieveStorage();
-  // const initialState = JSON.parse(state || '{}');
-  const initialState = mockState;
+  const state = await retrieveStorage();
+  const initialState = JSON.parse(state || '{}');
+  // const initialState = mockState;
   const createStore = require('../../app/store/configureStore');
+  const store = createStore(initialState);
+
+  store.subscribe(throttle(async () => {
+    await saveStorage(store.getState());
+    console.log('Saved storage to Chrome');
+  }, 1000));
 
   const eltsToRenderInto = [...document.querySelectorAll('.yt-playlists-sub-btn-root')];
   eltsToRenderInto.forEach(elt => {
     ReactDOM.render(
       <Root
-        store={createStore(initialState)}
+        store={store}
         type={TYPE.SUBSCRIPTION_BUTTON}
         playlistId={elt.dataset.playlistid}
       />,
@@ -55,12 +63,5 @@ const injectElementIntoPage = () => {
     reactRoot.className = 'yt-playlists-sub-btn-root';
     reactRoot.dataset.playlistid = playlistId;
     elt.appendChild(reactRoot);
-  });
-};
-
-const retrieveStorage = () => {
-  //TODO think about caching the playlists once they're retrieved from RSS feed
-  return new Promise((resolve, reject) => {
-    chrome.storage.sync.get('yt-playlists', obj => resolve(obj));
   });
 };

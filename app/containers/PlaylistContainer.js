@@ -17,7 +17,8 @@ const videoShape = {
 
 const playlistShape = {
   id: PropTypes.string.isRequired,
-  url: PropTypes.string.isRequired,
+  feedUrl: PropTypes.string.isRequired,
+  playlistUrl: PropTypes.string.isRequired,
   videos: PropTypes.arrayOf(videoShape)
 };
 
