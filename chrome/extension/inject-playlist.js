@@ -1,40 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Root, { TYPE } from '../../app/containers/Root';
-import { retrieveStorage, saveStorage } from '../../app/utils/storage';
-import throttle from 'lodash/throttle';
-
-const mockState = {
-  playlists: {
-    'PL96C35uN7xGI9HGKHsArwxiOejecVyNem': {
-      url: 'https://www.youtube.com/feeds/videos.xml?playlist_id=PL96C35uN7xGI9HGKHsArwxiOejecVyNem',
-      channelId: 'UCBa659QWEk1AI4Tg--mrJ2A',
-      videos: [
-        {
-          videoTitle: 'Why Hold Music Sounds Worse Now',
-          videoUrl: 'https://www.youtube.com/v/w2A8q3XIhu0?version=3',
-          thumbnailImg: 'https://i4.ytimg.com/vi/w2A8q3XIhu0/hqdefault.jpg',
-          channelName: 'Tom Scott',
-          channelUrl: 'https://www.youtube.com/channel/UCBa659QWEk1AI4Tg--mrJ2A',
-          views: 559260,
-          timestamp: '2017-11-27T16:00:04+00:00'
-        }
-      ]
-    }
-  },
-};
+import { intializeStoreFromChromeStorage } from './common/inject';
 
 window.addEventListener('load', async () => {
   injectElementIntoPage();
-  const initialState = await retrieveStorage();
-  // const initialState = mockState;
-  const createStore = require('../../app/store/configureStore');
-  const store = createStore(initialState);
-
-  store.subscribe(throttle(async () => {
-    await saveStorage(store.getState());
-    console.log('Saved storage to Chrome');
-  }, 1000));
+  const store = await intializeStoreFromChromeStorage();
 
   ReactDOM.render(
     <Root
