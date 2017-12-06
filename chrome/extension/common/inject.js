@@ -2,7 +2,7 @@ import { retrieveStorage, saveStorage } from '../../../app/utils/storage';
 import throttle from 'lodash/throttle';
 import createStore from '../../../app/store/configureStore';
 
-export async function intializeStoreFromChromeStorage() {
+export const intializeStoreFromChromeStorage = async () => {
   const initialState = await retrieveStorage();
   const store = createStore(initialState);
 
@@ -12,4 +12,4 @@ export async function intializeStoreFromChromeStorage() {
   }, 1000));
 
   return store;
-}
+};

@@ -1,5 +1,6 @@
 import * as PlaylistAction from '../constants/PropTypeValidation';
 import * as SubscriptionAction from '../constants/SubscriptionConstants';
+import { getPlaylistFeedUrl } from '../utils/playlists';
 
 export default (state = {}, action) => {
   let playlistId;
@@ -15,7 +16,7 @@ export default (state = {}, action) => {
       return {
         ...state,
         [playlistId]: {
-          feedUrl: `https://www.youtube.com/feeds/videos.xml?playlist_id=${playlistId}`
+          feedUrl: getPlaylistFeedUrl(playlistId)
         }
       };
     case SubscriptionAction.UNSUBSCRIBE_FROM_PLAYLIST:
