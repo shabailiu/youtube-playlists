@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import VideoCard from '../VideoCard/VideoCard';
+import VideoCard from '../VideoGridCard/VideoGridCard';
 
-export class PlaylistContainer extends Component {
+export class VideoDisplay extends Component {
   static propTypes = {};
 
   render() {
@@ -21,4 +21,4 @@ export class PlaylistContainer extends Component {
   }
 }
 
-export default PlaylistContainer;
+export default VideoDisplay;

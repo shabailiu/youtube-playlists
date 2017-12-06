@@ -1,9 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import PlaylistContainer from '../components/PlaylistContainer/PlaylistContainer';
+import VideoDisplay from '../components/VideoDisplay/VideoDisplay';
 import _ from 'lodash';
-import './App.less';
+import './PlaylistContainer.less';
 
 const videoShape = () => ({
   videoTitle: PropTypes.string.isRequired,
@@ -21,7 +21,7 @@ const playlistShape = () => ({
   videos: PropTypes.arrayOf(videoShape)
 });
 
-export class App extends Component {
+export class PlaylistContainer extends Component {
 
   static propTypes = {
     playlists: playlistShape.isRequired
@@ -34,7 +34,7 @@ export class App extends Component {
     return (
       <div>
         <h1>hiasdf</h1>
-        <PlaylistContainer
+        <VideoDisplay
           videos={videos}
         />
       </div>
@@ -50,4 +50,4 @@ const mapDispatchToProps = dispatch => ({
 
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(PlaylistContainer);

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropType from 'prop-types';
 
-export class VideoCard extends Component {
+export class VideoGridCard extends Component {
   static propTypes = {};
 
   render() {
@@ -130,4 +130,4 @@ export class VideoCard extends Component {
   }
 }
 
-export default VideoCard;
+export default VideoGridCard;

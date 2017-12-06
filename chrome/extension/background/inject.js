@@ -41,6 +41,22 @@ chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
     return;
   }
 
-  loadScript('inject', tabId, () => console.log('load inject bundle success!'));
-  // loadScript('todoapp', tabId, () => console.log('load todoapp bundle success!'));
+  loadScript('inject-playlist', tabId, () => console.log('load inject playlist bundle success!'));
+});
+
+//TODO need to add subscription buttons on playlist page
+/**
+ * should I have a different bundle for this scenario? I imagine yes, so that we can minimize the size? and probably another listener
+ */
+
+chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
+  if (changeInfo.status !== 'loading' || !tab.url.match('https://www\\.youtube\\.com/.+/.+/playlists')) {
+    return;
+  }
+  const result = await isInjected(tabId);
+  if (chrome.runtime.lastError || result[0]) {
+    return;
+  }
+
+  loadScript('inject-subscription-button', tabId, () => console.log('load inject subscription button bundle success!'));
 });
