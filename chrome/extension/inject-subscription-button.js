@@ -26,8 +26,7 @@ const mockState = {
 
 window.addEventListener('load', async () => {
   injectElementIntoPage();
-  const state = await retrieveStorage();
-  const initialState = JSON.parse(state || '{}');
+  const initialState = await retrieveStorage();
   // const initialState = mockState;
   const createStore = require('../../app/store/configureStore');
   const store = createStore(initialState);
