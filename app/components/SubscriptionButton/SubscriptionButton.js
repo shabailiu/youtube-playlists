@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import './SubscriptionButton.less';
 
 export class SubscriptionButton extends Component {
   static propTypes = {
@@ -23,6 +24,25 @@ export class SubscriptionButton extends Component {
     unsubscribeFromPlaylist(playlistId);
   };
 
+  renderButton = () => {
+    return (
+      <button
+        className="yt-uix-button yt-uix-button-size-default yt-uix-button-subscribe-branded yt-uix-button-has-icon no-icon-markup yt-uix-subscription-button yt-can-buffer"
+        type="button"
+        onClick={this.subscribe}
+      >
+        <span className="yt-uix-button-content">
+          <span
+            className="subscribe-label"
+            aria-label="Subscribe"
+          >
+            Subscribe
+          </span>
+        </span>
+      </button>
+    );
+  };
+
   render() {
     const { isSubscribed } = this.props;
     let button;
@@ -35,7 +55,7 @@ export class SubscriptionButton extends Component {
 
     return (
       <div className="yt-playlists-sub-btn">
-        {button}
+        {this.renderButton()}
       </div>
     );
   }
