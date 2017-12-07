@@ -75,3 +75,8 @@ export const formatViewCount = views => {
 };
 
 export const formatTimestampRelative = timestamp => moment(timestamp).fromNow();
+
+export const initializePlaylist = playlistId => ({
+  feedUrl: getPlaylistFeedUrl(playlistId),
+  playlistUrl: getPlaylistUrl(playlistId)
+});

@@ -15,7 +15,7 @@ export class VideoDisplayHeader extends Component {
                   <button
                     className="yt-uix-button yt-uix-button-size-default yt-uix-button-opacity yt-uix-button-empty yt-uix-button-has-icon yt-uix-tooltip"
                     type="button"
-                    onClick=";return false;"
+                    onClick={false}
                     aria-label="Switch to grid view"
                     title="Grid"
                     disabled="True"

@@ -36,7 +36,7 @@ export class VideoGridCard extends Component {
               <button
                 className="yt-uix-button-reverse flip addto-watch-queue-menu spf-nolink hide-until-delayloaded yt-uix-button yt-uix-button-dark-overflow-action-menu yt-uix-button-size-default yt-uix-button-has-icon no-icon-markup yt-uix-button-empty"
                 aria-haspopup="true"
-                onClick=";return false;"
+                onClick={false}
                 type="button"
                 aria-expanded="false"
               >
@@ -47,7 +47,7 @@ export class VideoGridCard extends Component {
                     role="menuitem"
                     className="overflow-menu-choice addto-watch-queue-menu-choice addto-watch-queue-play-next yt-uix-button-menu-item"
                     data-action="play-next"
-                    onClick=";return false;"
+                    onClick={false}
                     data-video-ids={videoId}
                   >
                     <span className="addto-watch-queue-menu-text">Play next</span>
@@ -56,7 +56,7 @@ export class VideoGridCard extends Component {
                     role="menuitem"
                     className="overflow-menu-choice addto-watch-queue-menu-choice addto-watch-queue-play-now yt-uix-button-menu-item"
                     data-action="play-now"
-                    onClick=";return false;"
+                    onClick={false}
                     data-video-ids={videoId}
                   >
                     <span className="addto-watch-queue-menu-text">Play now</span>
@@ -96,7 +96,7 @@ export class VideoGridCard extends Component {
                 <button
                   className="yt-uix-button yt-uix-button-size-default yt-uix-button-lockup-action-menu yt-uix-button-empty yt-uix-button-has-icon no-icon-markup  yt-uix-menu-trigger"
                   type="button"
-                  onClick=";return false;"
+                  onClick={false}
                   aria-pressed="false"
                   role="button"
                   aria-label="Action menu."

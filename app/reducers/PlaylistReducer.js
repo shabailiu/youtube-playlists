@@ -1,10 +1,10 @@
 import * as PlaylistAction from '../constants/PlaylistConstants';
 import * as SubscriptionAction from '../constants/SubscriptionConstants';
-import { getPlaylistFeedUrl, getPlaylistUrl, parseVideosFromFeed } from '../utils/playlists';
+import { initializePlaylist, parseVideosFromFeed } from '../utils/playlists';
 import get from 'lodash/get';
 
 export default (state = {}, action) => {
-  let playlistId, feedData, newState;
+  let playlistId, playlistIds, feedData, newState;
 
   switch (action.type) {
     case SubscriptionAction.SUBSCRIBE_TO_PLAYLIST:
@@ -16,10 +16,7 @@ export default (state = {}, action) => {
 
       return {
         ...state,
-        [playlistId]: {
-          feedUrl: getPlaylistFeedUrl(playlistId),
-          playlistUrl: getPlaylistUrl(playlistId)
-        }
+        [playlistId]: initializePlaylist(playlistId)
       };
     case SubscriptionAction.UNSUBSCRIBE_FROM_PLAYLIST:
       playlistId = action.payload;
@@ -28,7 +25,7 @@ export default (state = {}, action) => {
         return state;
       }
 
-      newState = {...state};
+      newState = { ...state };
       delete newState[playlistId];
 
       return newState;
@@ -36,13 +33,13 @@ export default (state = {}, action) => {
       feedData = action.payload;
       playlistId = get(feedData, 'yt:playlistId[0]');
 
-      newState = {...state};
+      newState = { ...state };
       newState[playlistId].videos = parseVideosFromFeed(feedData.entry);
 
       return newState;
     case PlaylistAction.HYDRATE_ALL_PLAYLISTS:
       feedData = action.payload;
-      newState = {...state};
+      newState = { ...state };
 
       feedData.forEach(feed => {
         playlistId = get(feed, 'yt:playlistId[0]');

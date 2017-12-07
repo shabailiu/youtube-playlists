@@ -22,7 +22,7 @@ export class PlaylistContainer extends Component {
 
   render() {
     const { playlists } = this.props;
-    const videos = Object.values(playlists).map(playlist => playlist.videos).reduce((acc, curr) => acc && acc.concat(curr));
+    let videos = Object.values(playlists).map(playlist => playlist.videos).reduce((acc, curr) => acc && acc.concat(curr));
 
     return (
       <ol className="item-section">

@@ -8,7 +8,7 @@ export const saveStorage = storage => {
       if (chrome.runtime.lastError) {
         reject(chrome.runtime.lastError);
       } else {
-        console.log('Storage saved');
+        console.log('Storage saved', storage);
         resolve();
       }
     });
@@ -16,7 +16,6 @@ export const saveStorage = storage => {
 };
 
 export const retrieveStorage = () => {
-  //TODO think about caching the playlists once they're retrieved from RSS feed
   return new Promise((resolve, reject) => {
     chrome.storage.sync.get(STATE_KEY, storage => {
       if (chrome.runtime.lastError) {
