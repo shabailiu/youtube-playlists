@@ -24,38 +24,43 @@ export class SubscriptionButton extends Component {
     unsubscribeFromPlaylist(playlistId);
   };
 
-  renderButton = () => {
-    return (
-      <button
-        className="yt-uix-button yt-uix-button-size-default yt-uix-button-subscribe-branded yt-uix-button-has-icon no-icon-markup yt-uix-subscription-button yt-can-buffer"
-        type="button"
-        onClick={this.subscribe}
-      >
-        <span className="yt-uix-button-content">
-          <span
-            className="subscribe-label"
-            aria-label="Subscribe"
-          >
-            Subscribe
-          </span>
-        </span>
-      </button>
-    );
-  };
-
   render() {
     const { isSubscribed } = this.props;
     let button;
 
     if (isSubscribed) {
-      button = <button onClick={this.unsubscribe}>Subscribed</button>
+      button = (
+        <button
+          className="subscribed yt-uix-button yt-uix-button-size-default yt-uix-button-subscribe-branded yt-uix-button-has-icon no-icon-markup yt-uix-subscription-button yt-can-buffer"
+          type="button"
+          onClick={this.unsubscribe}
+        >
+          <span className="yt-uix-button-content">
+            <span aria-label="Unsubscribe">
+              Unsubscribe
+            </span>
+          </span>
+        </button>
+      );
     } else {
-      button = <button onClick={this.subscribe}>Subscribe</button>
+      button = (
+        <button
+          className="yt-uix-button yt-uix-button-size-default yt-uix-button-subscribe-branded yt-uix-button-has-icon no-icon-markup yt-uix-subscription-button yt-can-buffer"
+          type="button"
+          onClick={this.subscribe}
+        >
+          <span className="yt-uix-button-content">
+            <span aria-label="Subscribe">
+              Subscribe
+            </span>
+          </span>
+        </button>
+      );
     }
 
     return (
       <div className="yt-playlists-sub-btn">
-        {this.renderButton()}
+        {button}
       </div>
     );
   }

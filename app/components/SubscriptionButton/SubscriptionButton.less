@@ -1,6 +1,20 @@
 .yt-playlists-sub-btn {
     button {
-        color: #737373;
-        border: 1px solid #ccc !important;
+        position: absolute;
+        bottom: 4px;
+        left: 4px;
+
+        &:not(.subscribed) {
+            color: #737373;
+            border: 1px solid #ccc;
+            background-color: #fafafa !important;
+
+            &:before {
+                background-position: -261px -70px;
+            }
+            &:hover, &:active, &:focus {
+                background-color: #eee !important;
+            }
+        }
     }
 }
