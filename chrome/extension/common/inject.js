@@ -8,7 +8,6 @@ export const intializeStoreFromChromeStorage = async () => {
 
   store.subscribe(throttle(async () => {
     await saveStorage(store.getState());
-    console.debug('Saved storage to Chrome');
   }, 1000));
 
   return store;

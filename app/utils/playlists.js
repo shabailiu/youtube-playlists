@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { parseString } from 'xml2js';
+import get from 'lodash/get';
 
 export const parseRSSFeed = async (feed) => {
   const feedsResponse = await axios.get(feed);
@@ -41,6 +42,18 @@ export const parseRSSFeeds = async (feeds) => {
   return parsedXml;
 };
 
+export const parseVideosFromFeed = videos => videos.map(video => ({
+  channelName: get(video, 'author[0].name[0]'),
+  channelUrl: get(video, 'author[0].uri[0]'),
+  thumbnailImg: get(video, 'media:group[0].media:thumbnail[0].$.url'),
+  uploadedTimestamp: get(video, 'published[0]'),
+  videoTitle: get(video, 'media:group[0].media:title[0]'),
+  videoUrl: get(video, 'media:group[0].media:content[0].$.url'),
+  views: get(video, 'media:group[0].media:community[0].media:statistics[0].$.views')
+}));
+
 export const isSubscribedPlaylist = (playlistId, playlists) => !!playlists[playlistId];
 
 export const getPlaylistFeedUrl = playlistId => `https://www.youtube.com/feeds/videos.xml?playlist_id=${playlistId}`;
+
+export const getPlaylistUrl = playlistId => `https://www.youtube.com/playlist?list=${playlistId}`;
