@@ -24,7 +24,11 @@ export class VideoDisplay extends Component {
       );
     });
 
-    return <ul className="shelf-content">{videoArr}</ul>
+    return (
+      <div className="multirow-shelf">
+        <ul className="shelf-content">{videoArr}</ul>
+      </div>
+    );
   }
 }
 

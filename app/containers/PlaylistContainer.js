@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import VideoDisplay from '../components/VideoDisplay/VideoDisplay';
+import VideoDisplayHeader from '../components/VideoDisplayHeader/VideoDisplayHeader';
 import './PlaylistContainer.less';
 import { playlistShape } from '../constants/PropTypeValidation';
 import { readFeedAndHydrateAllPlaylists } from '../actions/PlaylistActions';
@@ -22,13 +23,22 @@ export class PlaylistContainer extends Component {
   render() {
     const { playlists } = this.props;
     const videos = Object.values(playlists).map(playlist => playlist.videos).reduce((acc, curr) => acc && acc.concat(curr));
-console.log('videos', videos);
+
     return (
-      <div>
-        <VideoDisplay
-          videos={videos}
-        />
-      </div>
+      <ol className="item-section">
+        <li>
+          <div
+            className="feed-item-container browse-list-item-container yt-section-hover-container compact-shelf shelf-item branded-page-box clearfix"
+          >
+            <div className="feed-item-dismissable">
+              <VideoDisplayHeader />
+              <VideoDisplay
+                videos={videos}
+              />
+            </div>
+          </div>
+        </li>
+      </ol>
     );
   }
 }

@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { parseString } from 'xml2js';
 import get from 'lodash/get';
+import moment from 'moment';
 
 export const parseRSSFeed = async (feed) => {
   const feedsResponse = await axios.get(feed);
@@ -60,3 +61,17 @@ export const getPlaylistFeedUrl = playlistId => `https://www.youtube.com/feeds/v
 export const getPlaylistUrl = playlistId => `https://www.youtube.com/playlist?list=${playlistId}`;
 
 export const getVideoUrl = videoId => `/watch?v=${videoId}`;
+
+/**
+ * Format view count to a more readable format.
+ * @param views
+ */
+export const formatViewCount = views => {
+  try {
+    return parseInt(views).toLocaleString();
+  } catch (err) {
+    //TODO error handling
+  }
+};
+
+export const formatTimestampRelative = timestamp => moment(timestamp).fromNow();

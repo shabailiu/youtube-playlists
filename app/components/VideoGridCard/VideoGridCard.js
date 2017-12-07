@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import moment from 'moment';
 import { videoShape } from '../../constants/PropTypeValidation';
+import { formatViewCount, formatTimestampRelative } from '../../utils/playlists';
 
 export class VideoGridCard extends Component {
   static propTypes = {
@@ -85,8 +87,8 @@ export class VideoGridCard extends Component {
             </div>
             <div className="yt-lockup-meta ">
               <ul className="yt-lockup-meta-info">
-                <li>{views} views</li>
-                <li>{uploadedTimestamp}</li>
+                <li>{formatViewCount(views)} views</li>
+                <li>{formatTimestampRelative(uploadedTimestamp)}</li>
               </ul>
             </div>
             <div className="yt-uix-menu-container yt-lockup-action-menu">
