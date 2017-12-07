@@ -22,7 +22,26 @@ export class PlaylistContainer extends Component {
 
   render() {
     const { playlists } = this.props;
-    let videos = Object.values(playlists).map(playlist => playlist.videos).reduce((acc, curr) => acc && acc.concat(curr));
+    let videos =
+      Object
+        .values(playlists)
+        .map(playlist => playlist.videos)
+        .reduce((acc, curr) => acc.concat(curr), []) // Flatten array
+        .reduce((acc, curr) => { // Dedup
+          if (!curr) {
+            return acc;
+          }
+
+          const { ids, result } = acc;
+
+          if (ids.indexOf(curr.videoId) === -1) {
+            result.push(curr);
+            ids.push(curr.videoId);
+          }
+
+          return acc;
+        }, { ids: [], result: [] })
+        .result;
 
     return (
       <ol className="item-section">
