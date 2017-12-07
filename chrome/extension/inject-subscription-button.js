@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Root, { TYPE } from '../../app/containers/Root';
+import Root, { TYPE } from '../../app/Root';
 import { intializeStoreFromChromeStorage } from './common/inject';
 
 window.addEventListener('load', async () => {

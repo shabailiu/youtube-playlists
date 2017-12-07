@@ -1,7 +1,6 @@
 import { applyMiddleware, createStore, compose } from 'redux';
 import thunk from 'redux-thunk';
 import rootReducer from '../reducers';
-import storage from '../utils/storage';
 import logger from 'redux-logger'
 
 // If Redux DevTools Extension is installed use it, otherwise use Redux compose
@@ -15,7 +14,6 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?
 
 const enhancer = composeEnhancers(
   applyMiddleware(thunk),
-  // storage(),
   applyMiddleware(logger)
 );
 

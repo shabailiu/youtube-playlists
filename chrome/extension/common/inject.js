@@ -1,4 +1,4 @@
-import { retrieveStorage, saveStorage } from '../../../app/utils/storage';
+import { retrieveStorage, saveStorage } from '../utils/storage';
 import throttle from 'lodash/throttle';
 import createStore from '../../../app/store/configureStore';
 import { initializePlaylist } from '../../../app/utils/playlists';

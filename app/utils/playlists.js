@@ -80,3 +80,25 @@ export const initializePlaylist = playlistId => ({
   feedUrl: getPlaylistFeedUrl(playlistId),
   playlistUrl: getPlaylistUrl(playlistId)
 });
+
+export const pickAllVideos = playlists => (
+  Object
+    .values(playlists)
+    .map(playlist => playlist.videos)
+    .reduce((acc, curr) => acc.concat(curr), []) // Flatten array
+    .reduce((acc, curr) => { // Dedup
+      if (!curr) {
+        return acc;
+      }
+
+      const { ids, result } = acc;
+
+      if (ids.indexOf(curr.videoId) === -1) {
+        result.push(curr);
+        ids.push(curr.videoId);
+      }
+
+      return acc;
+    }, { ids: [], result: [] })
+    .result
+);

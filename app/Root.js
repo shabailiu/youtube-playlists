@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Provider } from 'react-redux';
-import PlaylistContainer from './PlaylistContainer';
-import SubscriptionButtonContainer from './SubscriptionButtonContainer';
+import PlaylistContainer from './components/PlaylistContainer/PlaylistContainer';
+import SubscriptionButtonContainer from './components/SubscriptionButtonContainer/SubscriptionButtonContainer';
 
 export const TYPE = {
   PLAYLIST_CONTAINER: 'PLAYLIST_CONTAINER',

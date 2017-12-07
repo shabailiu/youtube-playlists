@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import moment from 'moment';
 import { videoShape } from '../../constants/PropTypeValidation';
 import { formatViewCount, formatTimestampRelative } from '../../utils/playlists';
+import './VideoGridCard.less';
 
 export class VideoGridCard extends Component {
   static propTypes = {
@@ -22,11 +22,9 @@ export class VideoGridCard extends Component {
               <div className="yt-thumb video-thumb yt-uix-mouseover-img-wrap">
                 <span className="yt-thumb-simple">
                   <img
-                    width="196"
                     data-mouseover-log="True"
                     alt=""
                     data-ytimg="1"
-                    height="110"
                     src={thumbnailImg}
                   />
                 </span>
