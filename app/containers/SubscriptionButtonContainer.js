@@ -10,7 +10,7 @@ import { playlistShape } from '../constants/PropTypeValidation';
 
 export class SubscriptionButtonContainer extends Component {
   static propTypes = {
-    playlists: PropTypes.objectOf(playlistShape).isRequired,
+    playlists: PropTypes.objectOf(PropTypes.shape(playlistShape)).isRequired,
 
     // Passed in props
     playlistId: PropTypes.string.isRequired

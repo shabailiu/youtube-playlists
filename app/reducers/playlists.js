@@ -35,10 +35,19 @@ export default (state = {}, action) => {
     case PlaylistAction.HYDRATE_PLAYLIST:
       feedData = action.payload;
       playlistId = get(feedData, 'yt:playlistId[0]');
-      const videoData = feedData.entry;
 
       newState = {...state};
-      newState[playlistId].videos = parseVideosFromFeed(videoData);
+      newState[playlistId].videos = parseVideosFromFeed(feedData.entry);
+
+      return newState;
+    case PlaylistAction.HYDRATE_ALL_PLAYLISTS:
+      feedData = action.payload;
+      newState = {...state};
+
+      feedData.forEach(feed => {
+        playlistId = get(feed, 'yt:playlistId[0]');
+        newState[playlistId].videos = parseVideosFromFeed(feed.entry);
+      });
 
       return newState;
     default:

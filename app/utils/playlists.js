@@ -47,8 +47,9 @@ export const parseVideosFromFeed = videos => videos.map(video => ({
   channelUrl: get(video, 'author[0].uri[0]'),
   thumbnailImg: get(video, 'media:group[0].media:thumbnail[0].$.url'),
   uploadedTimestamp: get(video, 'published[0]'),
+  videoId: get(video, 'yt:videoId[0]'),
   videoTitle: get(video, 'media:group[0].media:title[0]'),
-  videoUrl: get(video, 'media:group[0].media:content[0].$.url'),
+  videoUrl: getVideoUrl(get(video, 'yt:videoId[0]')),
   views: get(video, 'media:group[0].media:community[0].media:statistics[0].$.views')
 }));
 
@@ -57,3 +58,5 @@ export const isSubscribedPlaylist = (playlistId, playlists) => !!playlists[playl
 export const getPlaylistFeedUrl = playlistId => `https://www.youtube.com/feeds/videos.xml?playlist_id=${playlistId}`;
 
 export const getPlaylistUrl = playlistId => `https://www.youtube.com/playlist?list=${playlistId}`;
+
+export const getVideoUrl = videoId => `/watch?v=${videoId}`;

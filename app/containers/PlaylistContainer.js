@@ -1,29 +1,33 @@
 import React, { Component, PropTypes } from 'react';
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import VideoDisplay from '../components/VideoDisplay/VideoDisplay';
-import _ from 'lodash';
 import './PlaylistContainer.less';
 import { playlistShape } from '../constants/PropTypeValidation';
+import { readFeedAndHydrateAllPlaylists } from '../actions/PlaylistActions';
 
 export class PlaylistContainer extends Component {
-
   static propTypes = {
-    playlists: PropTypes.objectOf(playlistShape).isRequired
+    hydrateAllPlaylists: PropTypes.func.isRequired,
+
+    // Passed in props
+    playlists: PropTypes.objectOf(PropTypes.shape(playlistShape)).isRequired
   };
+
+  componentWillMount() {
+    const { hydrateAllPlaylists, playlists } = this.props;
+    const feedUrls = Object.values(playlists).map(playlist => playlist.feedUrl);
+    hydrateAllPlaylists(feedUrls);
+  }
 
   render() {
     const { playlists } = this.props;
     const videos = Object.values(playlists).map(playlist => playlist.videos).reduce((acc, curr) => acc && acc.concat(curr));
-
+console.log('videos', videos);
     return (
       <div>
-        <h1>hiasdf</h1>
-        {videos && (
-          <VideoDisplay
-            videos={videos}
-          />
-        )}
+        <VideoDisplay
+          videos={videos}
+        />
       </div>
     );
   }
@@ -34,7 +38,9 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-
+  hydrateAllPlaylists(feedUrls) {
+    dispatch(readFeedAndHydrateAllPlaylists(feedUrls));
+  }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PlaylistContainer);

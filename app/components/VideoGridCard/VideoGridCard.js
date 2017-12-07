@@ -1,17 +1,20 @@
 import React, { Component } from 'react';
-import PropType from 'prop-types';
+import { videoShape } from '../../constants/PropTypeValidation';
 
 export class VideoGridCard extends Component {
-  static propTypes = {};
+  static propTypes = {
+    ...videoShape
+  };
 
   render() {
+    const { channelName, channelUrl, thumbnailImg, uploadedTimestamp, videoId, videoTitle, videoUrl, views } = this.props;
     return (
       <div className="yt-lockup yt-lockup-grid yt-lockup-video clearfix">
         <div className="yt-lockup-dismissable">
           <div className="yt-lockup-thumbnail contains-addto">
             <a
               aria-hidden="true"
-              href="/watch?v=Ym0Zi4VjF38"
+              href={videoUrl}
               className=" yt-uix-sessionlink      spf-link "
             >
               <div className="yt-thumb video-thumb yt-uix-mouseover-img-wrap">
@@ -22,7 +25,7 @@ export class VideoGridCard extends Component {
                     alt=""
                     data-ytimg="1"
                     height="110"
-                    src="https://i.ytimg.com/vi/Ym0Zi4VjF38/hqdefault.jpg?sqp=-oaymwEXCNACELwBSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLDJIgfC_-TB3JK6W4w6XeOlX0aE_A"
+                    src={thumbnailImg}
                   />
                 </span>
               </div>
@@ -31,7 +34,7 @@ export class VideoGridCard extends Component {
               <button
                 className="yt-uix-button-reverse flip addto-watch-queue-menu spf-nolink hide-until-delayloaded yt-uix-button yt-uix-button-dark-overflow-action-menu yt-uix-button-size-default yt-uix-button-has-icon no-icon-markup yt-uix-button-empty"
                 aria-haspopup="true"
-                onclick=";return false;"
+                onClick=";return false;"
                 type="button"
                 aria-expanded="false"
               >
@@ -42,8 +45,8 @@ export class VideoGridCard extends Component {
                     role="menuitem"
                     className="overflow-menu-choice addto-watch-queue-menu-choice addto-watch-queue-play-next yt-uix-button-menu-item"
                     data-action="play-next"
-                    onclick=";return false;"
-                    data-video-ids="Ym0Zi4VjF38"
+                    onClick=";return false;"
+                    data-video-ids={videoId}
                   >
                     <span className="addto-watch-queue-menu-text">Play next</span>
                   </li>
@@ -51,8 +54,8 @@ export class VideoGridCard extends Component {
                     role="menuitem"
                     className="overflow-menu-choice addto-watch-queue-menu-choice addto-watch-queue-play-now yt-uix-button-menu-item"
                     data-action="play-now"
-                    onclick=";return false;"
-                    data-video-ids="Ym0Zi4VjF38"
+                    onClick=";return false;"
+                    data-video-ids={videoId}
                   >
                     <span className="addto-watch-queue-menu-text">Play now</span>
                   </li>
@@ -63,29 +66,27 @@ export class VideoGridCard extends Component {
           <div className="yt-lockup-content">
             <h3 className="yt-lockup-title contains-action-menu">
               <a
-                href="/watch?v=Ym0Zi4VjF38"
+                href={videoUrl}
                 className=" yt-ui-ellipsis yt-ui-ellipsis-2 yt-uix-sessionlink      spf-link "
-                data-sessionlink="itct=CHcQlDUYBCITCPCOlonL89cCFci1fgod4egLqSjpHjIJYXRvbS1zdWJzWg9GRXN1YnNjcmlwdGlvbnM"
-                title="TITLE GOES HERE"
+                title={videoTitle}
                 aria-describedby="description-id-51175"
                 dir="ltr"
               >
-                TITLE GOESHERE
+                {videoTitle}
               </a>
             </h3>
             <div className="yt-lockup-byline yt-ui-ellipsis yt-ui-ellipsis-2">
               <a
-                href="/user/CNETTV"
+                href={channelUrl}
                 className="yt-uix-sessionlink       spf-link "
-                data-sessionlink="itct=CHcQlDUYBCITCPCOlonL89cCFci1fgod4egLqSjpHg"
               >
-                CNET
+                {channelName}
               </a>&nbsp;
             </div>
             <div className="yt-lockup-meta ">
               <ul className="yt-lockup-meta-info">
-                <li>583 views</li>
-                <li>Streamed 2 hours ago</li>
+                <li>{views} views</li>
+                <li>{uploadedTimestamp}</li>
               </ul>
             </div>
             <div className="yt-uix-menu-container yt-lockup-action-menu">
@@ -93,7 +94,7 @@ export class VideoGridCard extends Component {
                 <button
                   className="yt-uix-button yt-uix-button-size-default yt-uix-button-lockup-action-menu yt-uix-button-empty yt-uix-button-has-icon no-icon-markup  yt-uix-menu-trigger"
                   type="button"
-                  onclick=";return false;"
+                  onClick=";return false;"
                   aria-pressed="false"
                   role="button"
                   aria-label="Action menu."
@@ -112,8 +113,6 @@ export class VideoGridCard extends Component {
                       <button
                         type="button"
                         className="yt-ui-menu-item yt-uix-menu-close-on-select  dismiss-menu-choice"
-                        data-dismissal-token="CAQSEDE1MTI0OTQ2OTYwMDA1Njg%3D"
-                        data-innertube-clicktracking="CHcQlDUYBCITCPCOlonL89cCFci1fgod4egLqSjpHg"
                         data-action="replace-enclosing-action"
                       >
                         <span className="yt-ui-menu-item-label">Hide</span>

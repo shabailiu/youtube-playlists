@@ -1,6 +1,6 @@
-import * as PlaylistAction from '../constants/PlaylistConstants';
 import * as SubscriptionAction from '../constants/SubscriptionConstants';
-import { parseRSSFeed, getPlaylistFeedUrl } from '../utils/playlists';
+import { readFeedAndHydratePlaylist } from './PlaylistActions';
+import { getPlaylistFeedUrl } from '../utils/playlists';
 
 export const subscribeToPlaylist = playlistId => {
   return async (dispatch) => {
@@ -9,15 +9,7 @@ export const subscribeToPlaylist = playlistId => {
       payload: playlistId
     });
 
-    try {
-      const feedData = await parseRSSFeed(getPlaylistFeedUrl(playlistId));
-      dispatch({
-        type: PlaylistAction.HYDRATE_PLAYLIST,
-        payload: feedData.feed
-      });
-    } catch (err) {
-      //TODO error handling
-    }
+    dispatch(readFeedAndHydratePlaylist(getPlaylistFeedUrl(playlistId)));
   };
 };
 
