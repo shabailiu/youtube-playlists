@@ -7,6 +7,7 @@ import { pickAllVideos } from '../../utils/playlists';
 import { Collapse } from 'react-collapse';
 import { filterVideos, FILTER_BY } from './VideoDisplay/VideoDisplayUtils';
 import { playlistShape } from '../../constants/PropTypeValidation';
+import './VideoDisplayContainer.less';
 
 export class VideoDisplayContainer extends Component {
   static propTypes = {
@@ -14,6 +15,29 @@ export class VideoDisplayContainer extends Component {
     isFetching: PropTypes.bool,
     playlists: PropTypes.objectOf(PropTypes.shape(playlistShape)).isRequired
   };
+
+  constructor() {
+    super();
+
+    this.state = {
+      height: 0
+    };
+  }
+
+  componentDidMount() {
+    // TODO: This is kinda hacky
+    setTimeout(() => {
+      this.setState({
+        height: document.getElementById('yt-playlists-video-list').clientHeight
+      });
+    }, 100);
+
+    setTimeout(() => {
+      this.setState({
+        height: 'auto'
+      });
+    }, 600);
+  }
 
   render() {
     const { playlists, filterBy, isFetching } = this.props;
@@ -29,15 +53,20 @@ export class VideoDisplayContainer extends Component {
     return (
       <div
         id="yt-playlists-video-list-wrapper"
-        className="feed-item-container browse-list-item-container yt-section-hover-container compact-shelf shelf-item branded-page-box clearfix"
+        style={{ height: this.state.height }}
       >
-        <div className="feed-item-dismissable">
-          <VideoDisplayHeader />
-          <Collapse isOpened={true}>
-            <VideoDisplay
-              videos={filteredVideos}
-            />
-          </Collapse>
+        <div
+          id="yt-playlists-video-list"
+          className="feed-item-container browse-list-item-container yt-section-hover-container compact-shelf shelf-item branded-page-box clearfix"
+        >
+          <div className="feed-item-dismissable">
+            <VideoDisplayHeader />
+            <Collapse isOpened={true}>
+              <VideoDisplay
+                videos={filteredVideos}
+              />
+            </Collapse>
+          </div>
         </div>
       </div>
     );

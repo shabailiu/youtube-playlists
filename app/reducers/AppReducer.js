@@ -2,7 +2,7 @@ import * as AppAction from '../constants/AppConstants';
 import { FILTER_BY } from '../components/VideoDisplayContainer/VideoDisplay/VideoDisplayUtils';
 
 export default (state = {
-  filterBy: FILTER_BY.DEFAULT,
+  filterBy: FILTER_BY.LAST_MONTH,
   isFetching: false
 }, action) => {
   switch (action.type) {
