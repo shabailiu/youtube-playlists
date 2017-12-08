@@ -15,6 +15,7 @@ export default class Root extends Component {
   };
 
   render() {
+    console.debug('rendering Root');
     const { store, type, ...rest } = this.props;
     let app;
 
