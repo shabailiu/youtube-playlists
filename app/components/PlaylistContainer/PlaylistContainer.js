@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import VideoDisplay from '../VideoDisplay/VideoDisplay';
-import VideoDisplayHeader from '../VideoDisplayHeader/VideoDisplayHeader';
+import VideoDisplayHeader from '../VideoDisplay/VideoDisplayHeader/VideoDisplayHeader';
 import './PlaylistContainer.less';
 import { playlistShape } from '../../constants/PropTypeValidation';
 import { readFeedAndHydrateAllPlaylists } from '../../actions/PlaylistActions';

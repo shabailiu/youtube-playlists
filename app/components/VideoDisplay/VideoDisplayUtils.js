@@ -1,12 +1,12 @@
 import moment from 'moment';
 
 export const FILTER_BY = {
-  DEFAULT: 'DEFAULT',
-  TODAY: 'TODAY',
-  LAST_3_DAYS: 'LAST_3_DAYS',
-  LAST_WEEK: 'LAST_WEEK',
-  LAST_MONTH: 'LAST_MONTH',
-  LAST_YEAR: 'LAST_YEAR'
+  DEFAULT: 'Default',
+  TODAY: 'Today',
+  LAST_3_DAYS: 'Past 3 days',
+  LAST_WEEK: 'Past week',
+  LAST_MONTH: 'Past month',
+  LAST_YEAR: 'Past year'
 };
 
 const mapFilterToMoment = {

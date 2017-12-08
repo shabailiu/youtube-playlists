@@ -38,3 +38,8 @@ export const hydrateAllPlaylists = feedData => ({
   type: PlaylistAction.HYDRATE_ALL_PLAYLISTS,
   payload: feedData
 });
+
+export const filterVideos = filter => ({
+  type: PlaylistAction.FILTER_VIDEOS,
+  payload: filter
+});
