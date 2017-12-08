@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux';
-import SubscriptionButton from '../SubscriptionButton/SubscriptionButton';
+import SubscriptionButton from './SubscriptionButton/SubscriptionButton';
 import { isSubscribedPlaylist } from '../../utils/playlists';
 import * as SubscriptionActions from '../../actions/SubscriptionActions';
 import { playlistShape } from '../../constants/PropTypeValidation';

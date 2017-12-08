@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Root, { TYPE } from '../../../app/Root';
+import get from 'lodash/get';
 
 export const renderPlaylistContainer = store => {
   const reactRoot = document.createElement('li');
@@ -24,6 +25,7 @@ export const renderPlaylistContainer = store => {
 
 export const renderSubscriptionButtons = store => {
   const eltsToInject = [...document.querySelectorAll('.yt-lockup-thumbnail')]; //TODO put this in config
+  const reactRoots = [];
 
   eltsToInject.forEach(elt => {
     // Get the playlist ID from the anchor tag
@@ -36,10 +38,10 @@ export const renderSubscriptionButtons = store => {
     reactRoot.className = 'yt-playlists-sub-btn-root';
     reactRoot.dataset.playlistid = playlistId;
     elt.appendChild(reactRoot);
+    reactRoots.push(reactRoot);
   });
 
-  const eltsToRenderInto = [...document.querySelectorAll('.yt-playlists-sub-btn-root')];
-  eltsToRenderInto.forEach(elt => {
+  reactRoots.forEach(elt => {
     ReactDOM.render(
       <Root
         store={store}
@@ -52,5 +54,26 @@ export const renderSubscriptionButtons = store => {
 };
 
 export const renderProminentSubscriptionButton = store => {
+  const plHeader = document.getElementById('pl-header');
+  const eltToInject = plHeader.querySelector('.pl-header-thumb');
 
+  if (!plHeader || !eltToInject) {
+    return;
+  }
+
+  const playlistId = get(plHeader, 'dataset.fullListId');
+
+  const reactRoot = document.createElement('div');
+  reactRoot.className = 'yt-playlists-sub-btn-root';
+  reactRoot.dataset.playlistid = playlistId;
+  eltToInject.appendChild(reactRoot);
+
+  ReactDOM.render(
+    <Root
+      store={store}
+      type={TYPE.SUBSCRIPTION_BUTTON}
+      playlistId={playlistId}
+    />,
+    reactRoot
+  );
 };
