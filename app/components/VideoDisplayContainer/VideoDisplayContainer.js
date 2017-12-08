@@ -8,6 +8,7 @@ import { Collapse } from 'react-collapse';
 import { filterVideos, FILTER_BY } from './VideoDisplay/VideoDisplayUtils';
 import { playlistShape } from '../../constants/PropTypeValidation';
 import './VideoDisplayContainer.less';
+import LoadingIcon from '../LoadingIcon/LoadingIcon';
 
 export class VideoDisplayContainer extends Component {
   static propTypes = {
@@ -44,11 +45,11 @@ export class VideoDisplayContainer extends Component {
     const videos = pickAllVideos(playlists);
     const filteredVideos = filterVideos(videos, 12, filterBy);
 
-    // const loadingScreen = (
-    //   <div className="yt-playlists-loading-screen">
-    //     <LoadingIcon />
-    //   </div>
-    // );
+    const loadingScreen = (
+      <div className="yt-playlists-loading-screen">
+        <LoadingIcon />
+      </div>
+    );
 
     return (
       <div
@@ -61,11 +62,12 @@ export class VideoDisplayContainer extends Component {
         >
           <div className="feed-item-dismissable">
             <VideoDisplayHeader />
-            <Collapse isOpened={true}>
+            {isFetching && loadingScreen}
+            {!isFetching && <Collapse isOpened={true}>
               <VideoDisplay
                 videos={filteredVideos}
               />
-            </Collapse>
+            </Collapse>}
           </div>
         </div>
       </div>
