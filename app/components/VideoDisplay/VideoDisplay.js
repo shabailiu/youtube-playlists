@@ -5,20 +5,24 @@ import isEmpty from 'lodash/isEmpty';
 import VideoGridCard from '../VideoGridCard/VideoGridCard';
 import { videoShape } from '../../constants/PropTypeValidation';
 import { filterVideos, FILTER_BY } from './VideoDisplayUtils';
+import LoadingIcon from '../LoadingIcon/LoadingIcon';
+import './VideoDisplay.less';
 
 export class VideoDisplay extends Component {
   static propTypes = {
     filterBy: PropTypes.oneOf(Object.values(FILTER_BY)),
+    isFetching: PropTypes.bool,
     videos: PropTypes.arrayOf(PropTypes.shape(videoShape))
   };
 
   static defaultProps = {
     filterBy: FILTER_BY.DEFAULT,
+    isFetching: false,
     videos: []
   };
 
   render() {
-    const { videos, filterBy } = this.props;
+    const { videos, filterBy, isFetching } = this.props;
     const filteredVideos = filterVideos(videos, 12, filterBy);
     const videoArr = [];
 
@@ -37,16 +41,24 @@ export class VideoDisplay extends Component {
       );
     });
 
+    const loadingScreen = (
+      <div className="yt-playlists-loading-screen">
+        <LoadingIcon />
+      </div>
+    );
+
     return (
       <div className="multirow-shelf">
-        <ul className="shelf-content">{videoArr}</ul>
+        {isFetching && loadingScreen}
+        {!isFetching && <ul className="shelf-content">{videoArr}</ul>}
       </div>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  filterBy: state.config.filterBy
+  filterBy: state.app.filterBy,
+  isFetching: state.app.isFetching
 });
 
 export default connect(mapStateToProps)(VideoDisplay);

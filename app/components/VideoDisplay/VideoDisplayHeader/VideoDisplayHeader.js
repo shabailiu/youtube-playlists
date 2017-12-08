@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ClickableDropdown from '../../ClickableDropdown/ClickableDropdown';
 import { FILTER_BY } from '../VideoDisplayUtils';
-import { filterVideos } from '../../../actions/PlaylistActions';
+import { filterVideos } from '../../../actions/AppActions';
 
 const FILTER_BY_DISPLAY_VALUES = {
   [FILTER_BY.DEFAULT]: 'Default',

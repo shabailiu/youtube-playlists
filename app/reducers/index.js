@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
 import playlists from './PlaylistReducer';
-import config from './ConfigReducer';
+import app from './AppReducer';
 
 export default combineReducers({
   playlists,
-  config
+  app
 });

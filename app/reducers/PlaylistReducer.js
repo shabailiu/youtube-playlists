@@ -4,7 +4,7 @@ import { initializePlaylist, parseVideosFromFeed } from '../utils/playlists';
 import get from 'lodash/get';
 
 export default (state = {}, action) => {
-  let playlistId, playlistIds, feedData, newState;
+  let playlistId, feedData, newState;
 
   switch (action.type) {
     case SubscriptionAction.SUBSCRIBE_TO_PLAYLIST:
