@@ -1,5 +1,5 @@
 import * as AppAction from '../constants/AppConstants';
-import { FILTER_BY } from '../components/VideoDisplay/VideoDisplayUtils';
+import { FILTER_BY } from '../components/VideoDisplayContainer/VideoDisplay/VideoDisplayUtils';
 
 export default (state = {
   filterBy: FILTER_BY.DEFAULT,
