@@ -34,7 +34,7 @@ export class ClickableDropdown extends Component {
       this.setState({
         currSelected: item.text
       });
-      item && item.onClick(itemId);
+      item && item.onClick(item.id);
     }
   };
 

@@ -4,8 +4,16 @@ import ClickableDropdown from '../../ClickableDropdown/ClickableDropdown';
 import { FILTER_BY } from '../VideoDisplayUtils';
 import { filterVideos } from '../../../actions/PlaylistActions';
 
-export class VideoDisplayHeader extends Component {
+const FILTER_BY_DISPLAY_VALUES = {
+  [FILTER_BY.DEFAULT]: 'Default',
+  [FILTER_BY.TODAY]: 'Today',
+  [FILTER_BY.LAST_3_DAYS]: 'Past 3 days',
+  [FILTER_BY.LAST_WEEK]: 'Past week',
+  [FILTER_BY.LAST_MONTH]: 'Past month',
+  [FILTER_BY.LAST_YEAR]: 'Past year'
+};
 
+export class VideoDisplayHeader extends Component {
   handleClick = itemId => {
     const { handleFilter } = this.props;
     handleFilter(itemId);
@@ -47,7 +55,7 @@ export class VideoDisplayHeader extends Component {
 
     const filterByItems = Object.keys(FILTER_BY).map(filter => ({
       id: filter,
-      text: FILTER_BY[filter],
+      text: FILTER_BY_DISPLAY_VALUES[filter],
       onClick: this.handleClick
     }));
 
