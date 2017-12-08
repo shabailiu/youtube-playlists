@@ -11,8 +11,7 @@ const baseDevConfig = () => ({
   devtool: 'eval-cheap-module-source-map',
   entry: {
     background: [customPath, hotScript, path.join(__dirname, '../chrome/extension/background')],
-    'inject-playlist': [customPath, hotScript, path.join(__dirname, '../chrome/extension/inject-playlist')],
-    'inject-subscription-button': [customPath, hotScript, path.join(__dirname, '../chrome/extension/inject-subscription-button')]
+    inject: [customPath, hotScript, path.join(__dirname, '../chrome/extension/inject')]
   },
   devMiddleware: {
     publicPath: `http://${host}:${port}/js`,

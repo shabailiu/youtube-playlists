@@ -5,7 +5,8 @@ import SubscriptionButtonContainer from './components/SubscriptionButtonContaine
 
 export const TYPE = {
   PLAYLIST_CONTAINER: 'PLAYLIST_CONTAINER',
-  SUBSCRIPTION_BUTTON: 'SUBSCRIPTION_BUTTON'
+  SUBSCRIPTION_BUTTON: 'SUBSCRIPTION_BUTTON',
+  PROMINENT_SUBSCRIPTION_BUTTON: 'PROMINENT_SUBSCRIPTION_BUTTON'
 };
 
 export default class Root extends Component {
