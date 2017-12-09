@@ -12,7 +12,8 @@ export const videoShape = {
 };
 
 export const playlistShape = {
-  feedUrl: PropTypes.string.isRequired,
-  playlistUrl: PropTypes.string.isRequired,
+  feedUrl: PropTypes.string,
+  playlistUrl: PropTypes.string,
+  title: PropTypes.string,
   videos: PropTypes.arrayOf(PropTypes.shape(videoShape))
 };

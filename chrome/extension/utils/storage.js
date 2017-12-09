@@ -40,7 +40,7 @@ export const initializeStoreFromChromeStorage = async () => {
 
   if (playlistIds) {
     playlistIds.forEach(id => {
-      initialState.playlists[id] = initializePlaylist(id)
+      initialState.playlists[id] = initializePlaylist(id) //TODO: this should be an empty object but it throws an error
     });
   }
 

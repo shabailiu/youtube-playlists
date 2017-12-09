@@ -64,6 +64,7 @@ export class VideoGridCard extends Component {
             </span>
           </div>
           <div className="yt-lockup-content">
+
             <h3 className="yt-lockup-title contains-action-menu">
               <a
                 href={videoUrl}

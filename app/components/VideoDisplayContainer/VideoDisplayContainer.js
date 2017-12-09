@@ -26,7 +26,7 @@ export class VideoDisplayContainer extends Component {
   }
 
   componentDidMount() {
-    // TODO: This is kinda hacky
+    // TODO: This is kinda hacky - this animates the initial render, but is very slow
     setTimeout(() => {
       this.setState({
         height: document.getElementById('yt-playlists-video-list').clientHeight
@@ -62,12 +62,13 @@ export class VideoDisplayContainer extends Component {
         >
           <div className="feed-item-dismissable">
             <VideoDisplayHeader />
-            {isFetching && loadingScreen}
-            {!isFetching && <Collapse isOpened={true}>
-              <VideoDisplay
-                videos={filteredVideos}
-              />
-            </Collapse>}
+            {isFetching ? loadingScreen : (
+              <Collapse isOpened={true}>
+                <VideoDisplay
+                  videos={filteredVideos}
+                />
+              </Collapse>
+            )}
           </div>
         </div>
       </div>
