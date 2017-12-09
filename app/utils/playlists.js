@@ -43,9 +43,10 @@ export const parseRSSFeeds = async (feeds) => {
   return parsedXml;
 };
 
-export const parseVideosFromFeed = (videos = []) => videos.map(video => ({
+export const parseVideosFromFeed = (playlistId, videos = []) => videos.map(video => ({
   channelName: get(video, 'author[0].name[0]'),
   channelUrl: get(video, 'author[0].uri[0]'),
+  playlistId,
   thumbnailImg: get(video, 'media:group[0].media:thumbnail[0].$.url'),
   uploadedTimestamp: get(video, 'published[0]'),
   videoId: get(video, 'yt:videoId[0]'),
@@ -80,7 +81,7 @@ export const initializePlaylist = (playlistId, feedData = {}) => ({
   feedUrl: getPlaylistFeedUrl(playlistId),
   playlistUrl: getPlaylistUrl(playlistId),
   title: get(feedData, 'title[0]'),
-  videos: parseVideosFromFeed(feedData.entry)
+  videos: parseVideosFromFeed(playlistId, feedData.entry)
 });
 
 export const pickAllVideos = playlists => (

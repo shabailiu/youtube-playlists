@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { videoShape } from '../../constants/PropTypeValidation';
 import { formatViewCount, formatTimestampRelative } from '../../utils/playlists';
 import './VideoGridCard.less';
+import VideoPlaylistTitle from './VideoPlaylistTitle/VideoPlaylistTitle';
 
 export class VideoGridCard extends Component {
   static propTypes = {
@@ -9,7 +10,18 @@ export class VideoGridCard extends Component {
   };
 
   render() {
-    const { channelName, channelUrl, thumbnailImg, uploadedTimestamp, videoId, videoTitle, videoUrl, views } = this.props;
+    const {
+      channelName,
+      channelUrl,
+      playlistTitle,
+      thumbnailImg,
+      uploadedTimestamp,
+      videoId,
+      videoTitle,
+      videoUrl,
+      views
+    } = this.props;
+
     return (
       <div className="yt-lockup yt-lockup-grid yt-lockup-video clearfix">
         <div className="yt-lockup-dismissable">
@@ -64,7 +76,7 @@ export class VideoGridCard extends Component {
             </span>
           </div>
           <div className="yt-lockup-content">
-
+            <VideoPlaylistTitle title={playlistTitle} />
             <h3 className="yt-lockup-title contains-action-menu">
               <a
                 href={videoUrl}

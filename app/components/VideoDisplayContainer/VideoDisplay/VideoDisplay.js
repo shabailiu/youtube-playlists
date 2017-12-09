@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import isEmpty from 'lodash/isEmpty';
 import VideoGridCard from '../../VideoGridCard/VideoGridCard';
-import { videoShape } from '../../../constants/PropTypeValidation';
+import { playlistShape, videoShape } from '../../../constants/PropTypeValidation';
 import './VideoDisplay.less';
 
 export class VideoDisplay extends Component {
   static propTypes = {
+    playlists: PropTypes.shape(playlistShape).isRequired,
     videos: PropTypes.arrayOf(PropTypes.shape(videoShape))
   };
 
@@ -15,7 +17,7 @@ export class VideoDisplay extends Component {
   };
 
   render() {
-    const { videos } = this.props;
+    const { playlists, videos } = this.props;
     const videoArr = [];
 
     if (isEmpty(videos)) {
@@ -28,7 +30,10 @@ export class VideoDisplay extends Component {
           key={video.videoId}
           className="yt-shelf-grid-item"
         >
-          <VideoGridCard {...video} />
+          <VideoGridCard
+            playlistTitle={playlists[video.playlistId].title}
+            {...video}
+          />
         </li>
       );
     });
@@ -41,4 +46,8 @@ export class VideoDisplay extends Component {
   }
 }
 
-export default VideoDisplay;
+const mapStateToProps = state => ({
+  playlists: state.playlists
+});
+
+export default connect(mapStateToProps)(VideoDisplay);

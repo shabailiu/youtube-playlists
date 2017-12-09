@@ -3,7 +3,11 @@ import PropTypes from 'prop-types';
 
 export class VideoPlaylistTitle extends Component {
   static propTypes = {
-    title: PropTypes.string.isRequired
+    title: PropTypes.string
+  };
+
+  static defaultProps = {
+    title: null
   };
 
   render() {
