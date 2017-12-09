@@ -1,6 +1,6 @@
 import throttle from 'lodash/throttle';
 import createStore from '../../../app/store/configureStore';
-import { initializePlaylist } from '../../../app/utils/playlists';
+import { getPlaylistFeedUrl } from '../../../app/utils/playlists';
 
 const STATE_KEY = 'yt-playlists';
 
@@ -40,7 +40,9 @@ export const initializeStoreFromChromeStorage = async () => {
 
   if (playlistIds) {
     playlistIds.forEach(id => {
-      initialState.playlists[id] = initializePlaylist(id) //TODO: this should be an empty object but it throws an error
+      initialState.playlists[id] = {
+        feedUrl: getPlaylistFeedUrl(id) // Must initialize playlists with feed
+      };
     });
   }
 

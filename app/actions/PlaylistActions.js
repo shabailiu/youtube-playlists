@@ -8,7 +8,7 @@ export const readFeedAndHydratePlaylist = feedUrl => {
       const feedData = await parseRSSFeed(feedUrl);
       dispatch(hydratePlaylist(feedData.feed));
     } catch (err) {
-      //TODO error handling
+      console.error('Error in readFeedAndHydratePlaylist:', err);
     }
   };
 };
@@ -28,7 +28,7 @@ export const readFeedAndHydrateAllPlaylists = feedUrls => {
         dispatch(hydrateAllPlaylists(feedData));
       });
     } catch (err) {
-      //TODO error handling
+      console.error('Error in readFeedAndHydrateAllPlaylists:', err);
     }
   };
 };
