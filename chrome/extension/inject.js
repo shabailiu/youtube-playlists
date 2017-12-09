@@ -18,14 +18,15 @@ const determineComponentType = () => {
 };
 
 const componentType = determineComponentType();
-let loaded = true;
+let loaded = false;
 
 const checkLoaded = setInterval(async () => {
   loaded = determinePageLoad();
+  console.debug('is loaded', loaded);
 
   if (loaded) {
     clearInterval(checkLoaded);
-    const store = await initializeStoreFromChromeStorage(); //TODO: can we do this at the very top, before loading?
+    const store = await initializeStoreFromChromeStorage(); //TODO can we move this up
     injectElementIntoPage(store);
   }
 }, 250);

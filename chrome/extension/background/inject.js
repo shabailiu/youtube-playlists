@@ -37,12 +37,13 @@ chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
     return;
   }
 
-  const result = await isInjected(tabId);
-  if (chrome.runtime.lastError || result[0]) {
-    return;
-  }
-
   if (tab.url.match(Object.keys(mapUrlToComponentType).join('|'))) {
-    return loadScript('inject', tabId, () => console.log('load inject bundle success!'));
+    const result = await isInjected(tabId);
+
+    if (!chrome.runtime.lastError && !result[0]) {
+      return loadScript('inject', tabId, () => console.log('load inject bundle success!'));
+    } else {
+      console.debug(`failed to load script; lastError (${chrome.runtime.lastError}); isInjected (${result[0]})`);
+    }
   }
 });
