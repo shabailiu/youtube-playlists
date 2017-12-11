@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import './VideoPlaylistTitle.less';
 
 export class VideoPlaylistTitle extends Component {
   static propTypes = {

@@ -7,7 +7,7 @@ console.debug('extension/inject loaded from:', location.href);
 
 export const mapUrlToComponentType = {
   '^http(s?)://www\\.youtube\\.com/feed/subscriptions': TYPE.PLAYLIST_CONTAINER,
-  '^http(s?)://www\\.youtube\\.com/(.+/.+/playlists|user)': TYPE.SUBSCRIPTION_BUTTON,
+  '^http(s?)://www\\.youtube\\.com/(.+/.+/playlists)': TYPE.SUBSCRIPTION_BUTTON,
   '^http(s?)://www\\.youtube\\.com/playlist': TYPE.PROMINENT_SUBSCRIPTION_BUTTON
 };
 
