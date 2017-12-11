@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import ClickableDropdown from '../../ClickableDropdown/ClickableDropdown';
 import { FILTER_BY } from '../VideoDisplay/VideoDisplayUtils';
 import { filterVideos } from '../../../actions/AppActions';
 
 const FILTER_BY_DISPLAY_VALUES = {
-  [FILTER_BY.DEFAULT]: 'Default',
   [FILTER_BY.TODAY]: 'Today',
   [FILTER_BY.LAST_3_DAYS]: 'Past 3 days',
   [FILTER_BY.LAST_WEEK]: 'Past week',
@@ -14,12 +14,19 @@ const FILTER_BY_DISPLAY_VALUES = {
 };
 
 export class VideoDisplayHeader extends Component {
+  static propTypes = {
+    filterBy: PropTypes.oneOf(Object.values(FILTER_BY)),
+    handleFilter: PropTypes.func.isRequired
+  };
+
   handleClick = itemId => {
     const { handleFilter } = this.props;
     handleFilter(itemId);
   };
 
   render() {
+    const { filterBy } = this.props;
+
     const switchView = (
       <div className="yt-uix-menu-container feed-item-action-menu">
         <ul className="yt-uix-menu-top-level-button-container">
@@ -56,7 +63,8 @@ export class VideoDisplayHeader extends Component {
     const filterByItems = Object.keys(FILTER_BY).map(filter => ({
       id: filter,
       text: FILTER_BY_DISPLAY_VALUES[filter],
-      onClick: this.handleClick
+      onClick: this.handleClick,
+      defaultSelected: filter === filterBy
     }));
 
     return (
@@ -80,7 +88,7 @@ export class VideoDisplayHeader extends Component {
 }
 
 const mapStateToProps = state => ({
-
+  filterBy: state.app.filterBy
 });
 
 const mapDispatchToProps = dispatch => ({

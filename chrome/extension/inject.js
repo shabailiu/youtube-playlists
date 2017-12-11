@@ -7,7 +7,7 @@ console.debug('extension/inject loaded from:', location.href);
 
 export const mapUrlToComponentType = {
   '^http(s?)://www\\.youtube\\.com/feed/subscriptions': TYPE.PLAYLIST_CONTAINER,
-  '^http(s?)://www\\.youtube\\.com/.+/.+/playlists': TYPE.SUBSCRIPTION_BUTTON,
+  '^http(s?)://www\\.youtube\\.com/(.+/.+/playlists|user)': TYPE.SUBSCRIPTION_BUTTON,
   '^http(s?)://www\\.youtube\\.com/playlist': TYPE.PROMINENT_SUBSCRIPTION_BUTTON
 };
 
@@ -23,6 +23,7 @@ let loaded = false;
 const checkLoaded = setInterval(async () => {
   loaded = determinePageLoad();
   console.debug('is loaded', loaded);
+  console.debug('loaded elt', document.querySelector('#browse-items-primary .yt-lockup-playlist .yt-lockup-thumbnail'));
 
   if (loaded) {
     clearInterval(checkLoaded);
@@ -38,7 +39,8 @@ const determinePageLoad = () => {
     case TYPE.PLAYLIST_CONTAINER:
       return !!document.getElementById('browse-items-primary');
     case TYPE.SUBSCRIPTION_BUTTON:
-      return !!document.getElementById('browse-items-primary');
+      return !!document.querySelector('#browse-items-primary .browse-list-item-container .yt-lockup-playlist') ||
+        !!document.querySelector('#browse-items-primary .channels-browse-content-grid .yt-lockup-playlist');
     case TYPE.PROMINENT_SUBSCRIPTION_BUTTON:
       return !!document.getElementById('pl-header');
     default:

@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Root, { TYPE } from '../../../app/Root';
 import get from 'lodash/get';
+import isEmpty from 'lodash/isEmpty';
 
 export const renderPlaylistContainer = store => {
   const reactRoot = document.createElement('li');
@@ -24,14 +25,22 @@ export const renderPlaylistContainer = store => {
 };
 
 export const renderSubscriptionButtons = store => {
-  const eltsToInject = [...document.querySelectorAll('.yt-lockup-thumbnail')]; //TODO put this in config
+  const eltsToInject = [...document.querySelectorAll('.yt-lockup-playlist .yt-lockup-thumbnail')]; //TODO put this in config
   const reactRoots = [];
 
   eltsToInject.forEach(elt => {
     // Get the playlist ID from the anchor tag
     const anchor = elt.querySelector('a'); //TODO error handling
+    if (!anchor) {
+      return console.error('renderSubscriptionButtons: Unable to find anchor tag in:', elt);
+    }
+
     const playlistLink = anchor.href;
     const matches = playlistLink.match(/list=(.+)$/); //TODO error handling
+    if (isEmpty(matches)) {
+      return console.error('renderSubscriptionButtons: Unable to retrieve playlist ID from link:', playlistLink);
+    }
+
     const playlistId = matches[1];
 
     const reactRoot = document.createElement('div');
