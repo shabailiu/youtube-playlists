@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Root, { TYPE } from '../../../app/Root';
+import Root, { COMPONENT_TYPE } from '../../../app/Root';
 import get from 'lodash/get';
 import isEmpty from 'lodash/isEmpty';
 
@@ -18,7 +18,7 @@ export const renderPlaylistContainer = store => {
   ReactDOM.render(
     <Root
       store={store}
-      type={TYPE.PLAYLIST_CONTAINER}
+      type={COMPONENT_TYPE.PLAYLIST_CONTAINER}
     />,
     document.querySelector('#yt-playlists')
   );
@@ -54,7 +54,7 @@ export const renderSubscriptionButtons = store => {
     ReactDOM.render(
       <Root
         store={store}
-        type={TYPE.SUBSCRIPTION_BUTTON}
+        type={COMPONENT_TYPE.SUBSCRIPTION_BUTTON}
         playlistId={elt.dataset.playlistid}
       />,
       elt
@@ -80,7 +80,7 @@ export const renderProminentSubscriptionButton = store => {
   ReactDOM.render(
     <Root
       store={store}
-      type={TYPE.SUBSCRIPTION_BUTTON}
+      type={COMPONENT_TYPE.SUBSCRIPTION_BUTTON}
       playlistId={playlistId}
     />,
     reactRoot

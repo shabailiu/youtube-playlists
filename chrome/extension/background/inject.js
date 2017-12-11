@@ -1,4 +1,4 @@
-import { mapUrlToComponentType } from '../inject';
+import { mapUrlToPageType } from '../utils/ytHelper';
 
 function isInjected(tabId) {
   return chrome.tabs.executeScriptAsync(tabId, {
@@ -32,18 +32,30 @@ function loadScript(name, tabId, cb) {
   }
 }
 
+const urlTrack = {};
+
 chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
   if (changeInfo.status !== 'loading') {
     return;
   }
 
-  if (tab.url.match(Object.keys(mapUrlToComponentType).join('|'))) {
+  if (tab.url.match(Object.keys(mapUrlToPageType).join('|'))) {
     const result = await isInjected(tabId);
 
     if (!chrome.runtime.lastError && !result[0]) {
       return loadScript('inject', tabId, () => console.log('load inject bundle success!'));
     } else {
-      console.debug(`failed to load script; lastError (${chrome.runtime.lastError}); isInjected (${result[0]})`);
+      if (result[0]) { // Bundle already loaded
+        // Check if the URL has changed
+        if (urlTrack[tabId] === tab.url) {
+          return;
+        }
+
+        urlTrack[tabId] = tab.url;
+        chrome.tabs.sendMessage(tabId, { execute: true });
+      } else {
+        console.debug(`failed to load script; lastError (${chrome.runtime.lastError})`);
+      }
     }
   }
 });

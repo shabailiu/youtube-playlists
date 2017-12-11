@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 import PlaylistContainer from './components/PlaylistContainer/PlaylistContainer';
 import SubscriptionButtonContainer from './components/SubscriptionButtonContainer/SubscriptionButtonContainer';
 
-export const TYPE = {
+export const COMPONENT_TYPE = {
   PLAYLIST_CONTAINER: 'PLAYLIST_CONTAINER',
   SUBSCRIPTION_BUTTON: 'SUBSCRIPTION_BUTTON',
   PROMINENT_SUBSCRIPTION_BUTTON: 'PROMINENT_SUBSCRIPTION_BUTTON'
@@ -12,7 +12,7 @@ export const TYPE = {
 export default class Root extends Component {
   static propTypes = {
     store: PropTypes.object.isRequired,
-    type: PropTypes.oneOf(Object.values(TYPE)).isRequired
+    type: PropTypes.oneOf(Object.values(COMPONENT_TYPE)).isRequired
   };
 
   render() {
@@ -21,11 +21,11 @@ export default class Root extends Component {
     let app;
 
     switch(type) {
-      case TYPE.PLAYLIST_CONTAINER:
+      case COMPONENT_TYPE.PLAYLIST_CONTAINER:
       default:
         app = <PlaylistContainer {...rest} />;
         break;
-      case TYPE.SUBSCRIPTION_BUTTON:
+      case COMPONENT_TYPE.SUBSCRIPTION_BUTTON:
         app = <SubscriptionButtonContainer {...rest} />;
         break;
     }
