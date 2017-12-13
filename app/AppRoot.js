@@ -9,14 +9,14 @@ export const COMPONENT_TYPE = {
   PROMINENT_SUBSCRIPTION_BUTTON: 'PROMINENT_SUBSCRIPTION_BUTTON'
 };
 
-export default class Root extends Component {
+export default class AppRoot extends Component {
   static propTypes = {
     store: PropTypes.object.isRequired,
     type: PropTypes.oneOf(Object.values(COMPONENT_TYPE)).isRequired
   };
 
   render() {
-    console.debug('rendering Root');
+    console.debug('rendering AppRoot');
     const { store, type, ...rest } = this.props;
     let app;
 

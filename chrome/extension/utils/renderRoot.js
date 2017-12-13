@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Root, { COMPONENT_TYPE } from '../../../app/Root';
+import Root, { COMPONENT_TYPE } from '../../../app/AppRoot';
 import get from 'lodash/get';
 import isEmpty from 'lodash/isEmpty';
 

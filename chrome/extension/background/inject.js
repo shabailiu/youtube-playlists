@@ -48,6 +48,7 @@ chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
       if (result[0]) { // Bundle already loaded
         // Check if the URL has changed
         if (urlTrack[tabId] === tab.url) {
+          console.debug('url has not changed; ignoring');
           return;
         }
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { COMPONENT_TYPE } from '../../app/Root';
+import { COMPONENT_TYPE } from '../../app/AppRoot';
 import { initializeStoreFromChromeStorage } from './utils/storage';
 import * as RenderReactRoot from './utils/renderRoot';
 import { getPageType, isPageLoaded, mapPageTypeToComponents, mapUrlToPageType } from './utils/ytHelper';
@@ -45,7 +45,7 @@ executeScript();
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message && message.execute) {
-    console.debug('received execute message');
+    console.debug('bundle already loaded; executing script');
     executeScript();
   }
 });

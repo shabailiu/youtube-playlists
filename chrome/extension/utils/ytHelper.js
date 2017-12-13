@@ -1,4 +1,4 @@
-import { COMPONENT_TYPE } from '../../../app/Root';
+import { COMPONENT_TYPE } from '../../../app/AppRoot';
 
 export const PAGE_TYPE = {
   SUBSCRIPTION_HOME: 'SUBSCRIPTION_HOME',
