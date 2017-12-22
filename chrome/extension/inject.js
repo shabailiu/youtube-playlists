@@ -1,8 +1,8 @@
 import React from 'react';
 import { COMPONENT_TYPE } from '../../app/AppRoot';
-import { initializeStoreFromChromeStorage } from './utils/storage';
 import * as RenderReactRoot from './utils/renderRoot';
 import { getPageType, isPageLoaded, mapPageTypeToComponents, mapUrlToPageType } from './utils/ytHelper';
+import { Store } from 'react-chrome-redux';
 
 console.debug('extension/inject loaded from:', location.href);
 const maxLoops = 40;
@@ -14,6 +14,8 @@ const executeScript = () => {
   let loaded = false;
   let i = 0;
 
+  // Check periodically if the page is loaded
+  // Necessary until a better solution for tracking Polymer client side redirects is found
   const checkLoaded = setInterval(async () => {
     if (++i > maxLoops) {
       return clearInterval(checkLoaded);
@@ -24,7 +26,9 @@ const executeScript = () => {
 
     if (loaded) {
       clearInterval(checkLoaded);
-      const store = await initializeStoreFromChromeStorage(); //TODO can we move this up
+      const store = new Store({
+        portName: 'MY_APP'
+      });
       componentTypes.forEach(componentType => injectElementIntoPage(componentType, store));
     }
   }, 250);

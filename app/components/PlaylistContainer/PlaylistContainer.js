@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import './PlaylistContainer.less';
 import { playlistShape } from '../../constants/PropTypeValidation';
-import { readFeedAndHydrateAllPlaylists } from '../../actions/PlaylistActions';
+import { readFeedAndHydrateAllPlaylistsAlias } from '../../actions/aliases';
 import VideoDisplayContainer from '../VideoDisplayContainer/VideoDisplayContainer';
 
 export class PlaylistContainer extends Component {
@@ -34,7 +34,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   hydrateAllPlaylists(feedUrls) {
-    dispatch(readFeedAndHydrateAllPlaylists(feedUrls));
+    dispatch(readFeedAndHydrateAllPlaylistsAlias(feedUrls));
   }
 });
 

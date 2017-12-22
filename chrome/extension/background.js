@@ -1,3 +1,4 @@
+import { initializeStoreFromChromeStorage } from './utils/storage';
 const bluebird = require('bluebird');
 
 global.Promise = bluebird;
@@ -29,6 +30,9 @@ promisifyAll(chrome.storage, [
   'sync'
 ]);
 
-require('./background/contextMenus');
-require('./background/inject');
-require('./background/badge');
+initializeStoreFromChromeStorage().then(() => {
+  require('./background/contextMenus');
+  require('./background/inject');
+  require('./background/badge');
+});
+

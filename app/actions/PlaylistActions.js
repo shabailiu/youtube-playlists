@@ -13,7 +13,8 @@ export const readFeedAndHydratePlaylist = feedUrl => {
   };
 };
 
-export const readFeedAndHydrateAllPlaylists = feedUrls => {
+export const readFeedAndHydrateAllPlaylists = action => {
+  const feedUrls = action.payload;
   return async (dispatch) => {
     dispatch(fetchingPlaylists(true));
 

@@ -1,15 +1,22 @@
 import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
 
 export class ConfigContainer extends Component {
   static propTypes = {
 
   };
 
+  click = () => {
+    this.props.dispatch({
+      type: 'TESTING'
+    });
+  };
+
   render() {
     return (
-      <div>hello world</div>
+      <button onClick={this.click}>dispatch</button>
     );
   }
 }
 
-export default ConfigContainer;
+export default connect()(ConfigContainer);

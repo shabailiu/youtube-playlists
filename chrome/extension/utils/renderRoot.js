@@ -15,13 +15,15 @@ export const renderPlaylistContainer = store => {
     document.body.appendChild(reactRoot);
   }
 
-  ReactDOM.render(
-    <Root
-      store={store}
-      type={COMPONENT_TYPE.PLAYLIST_CONTAINER}
-    />,
-    document.querySelector('#yt-playlists')
-  );
+  store.ready().then(() => {
+    ReactDOM.render(
+      <Root
+        store={store}
+        type={COMPONENT_TYPE.PLAYLIST_CONTAINER}
+      />,
+      document.querySelector('#yt-playlists')
+    );
+  });
 };
 
 export const renderSubscriptionButtons = store => {
@@ -50,15 +52,17 @@ export const renderSubscriptionButtons = store => {
     reactRoots.push(reactRoot);
   });
 
-  reactRoots.forEach(elt => {
-    ReactDOM.render(
-      <Root
-        store={store}
-        type={COMPONENT_TYPE.SUBSCRIPTION_BUTTON}
-        playlistId={elt.dataset.playlistid}
-      />,
-      elt
-    );
+  store.ready().then(() => {
+    reactRoots.forEach(elt => {
+      ReactDOM.render(
+        <Root
+          store={store}
+          type={COMPONENT_TYPE.SUBSCRIPTION_BUTTON}
+          playlistId={elt.dataset.playlistid}
+        />,
+        elt
+      );
+    });
   });
 };
 
@@ -77,12 +81,14 @@ export const renderProminentSubscriptionButton = store => {
   reactRoot.dataset.playlistid = playlistId;
   eltToInject.appendChild(reactRoot);
 
-  ReactDOM.render(
-    <Root
-      store={store}
-      type={COMPONENT_TYPE.SUBSCRIPTION_BUTTON}
-      playlistId={playlistId}
-    />,
-    reactRoot
-  );
+  store.ready().then(() => {
+    ReactDOM.render(
+      <Root
+        store={store}
+        type={COMPONENT_TYPE.SUBSCRIPTION_BUTTON}
+        playlistId={playlistId}
+      />,
+      reactRoot
+    );
+  });
 };

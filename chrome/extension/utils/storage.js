@@ -1,6 +1,7 @@
 import throttle from 'lodash/throttle';
 import createStore from '../../../app/store/configureStore';
 import { getPlaylistFeedUrl } from '../../../app/utils/playlists';
+import { wrapStore } from 'react-chrome-redux';
 
 const STATE_KEY = 'yt-playlists';
 
@@ -32,7 +33,7 @@ export const retrieveStorage = () => {
   });
 };
 
-export const initializeStoreFromChromeStorage = async () => {
+export const initializeStoreFromChromeStorage = async () => { //TODO i think this needs to be called in background.js... or background/inject
   const playlistIds = await retrieveStorage();
   const initialState = {
     playlists: {}
@@ -51,6 +52,8 @@ export const initializeStoreFromChromeStorage = async () => {
   store.subscribe(throttle(async () => {
     await saveStorage(transformStateForChromeStorage(store.getState()));
   }, 1000));
+
+  wrapStore(store, { portName: 'MY_APP' });
 
   return store;
 };
