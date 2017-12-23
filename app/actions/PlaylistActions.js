@@ -2,7 +2,13 @@ import * as PlaylistAction from '../constants/PlaylistConstants';
 import { parseRSSFeed } from '../utils/playlists';
 import { fetchingPlaylists } from './AppActions';
 
-export const readFeedAndHydratePlaylist = feedUrl => {
+export const readFeedAndHydratePlaylist = feedUrl => ({
+  type: PlaylistAction.READ_FEED_AND_HYDRATE_PLAYLIST,
+  payload: feedUrl
+});
+
+const readFeedAndHydratePlaylistImpl = action => {
+  const feedUrl = action.payload;
   return async (dispatch) => {
     try {
       const feedData = await parseRSSFeed(feedUrl);
@@ -13,7 +19,12 @@ export const readFeedAndHydratePlaylist = feedUrl => {
   };
 };
 
-export const readFeedAndHydrateAllPlaylists = action => {
+export const readFeedAndHydrateAllPlaylists = feedUrls => ({
+  type: PlaylistAction.READ_FEED_AND_HYDRATE_ALL_PLAYLISTS,
+  payload: feedUrls
+});
+
+const readFeedAndHydrateAllPlaylistsImpl = action => {
   const feedUrls = action.payload;
   return async (dispatch) => {
     dispatch(fetchingPlaylists(true));
@@ -43,3 +54,8 @@ export const hydrateAllPlaylists = feedData => ({
   type: PlaylistAction.HYDRATE_ALL_PLAYLISTS,
   payload: feedData
 });
+
+export const aliases = {
+  [PlaylistAction.READ_FEED_AND_HYDRATE_PLAYLIST]: readFeedAndHydratePlaylistImpl,
+  [PlaylistAction.READ_FEED_AND_HYDRATE_ALL_PLAYLISTS]: readFeedAndHydrateAllPlaylistsImpl
+};
