@@ -3,7 +3,7 @@ import { parseRSSFeed } from '../utils/playlists';
 import { fetchingPlaylists } from './AppActions';
 
 export const readFeedAndHydratePlaylist = feedUrl => ({
-  type: PlaylistAction.READ_FEED_AND_HYDRATE_PLAYLIST,
+  type: PlaylistAction.alias.READ_FEED_AND_HYDRATE_PLAYLIST,
   payload: feedUrl
 });
 
@@ -20,7 +20,7 @@ const readFeedAndHydratePlaylistImpl = action => {
 };
 
 export const readFeedAndHydrateAllPlaylists = feedUrls => ({
-  type: PlaylistAction.READ_FEED_AND_HYDRATE_ALL_PLAYLISTS,
+  type: PlaylistAction.alias.READ_FEED_AND_HYDRATE_ALL_PLAYLISTS,
   payload: feedUrls
 });
 
@@ -56,6 +56,6 @@ export const hydrateAllPlaylists = feedData => ({
 });
 
 export const aliases = {
-  [PlaylistAction.READ_FEED_AND_HYDRATE_PLAYLIST]: readFeedAndHydratePlaylistImpl,
-  [PlaylistAction.READ_FEED_AND_HYDRATE_ALL_PLAYLISTS]: readFeedAndHydrateAllPlaylistsImpl
+  [PlaylistAction.alias.READ_FEED_AND_HYDRATE_PLAYLIST]: readFeedAndHydratePlaylistImpl,
+  [PlaylistAction.alias.READ_FEED_AND_HYDRATE_ALL_PLAYLISTS]: readFeedAndHydrateAllPlaylistsImpl
 };

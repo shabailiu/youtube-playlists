@@ -9,3 +9,5 @@ export const filterVideos = filter => ({
   type: AppAction.FILTER_VIDEOS,
   payload: filter
 });
+
+export const aliases = {};

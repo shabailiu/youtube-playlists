@@ -14,10 +14,13 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?
   compose;
 /* eslint-enable no-underscore-dangle */
 
+const debugMiddleware = () => next => action => {
+  console.log('debug', action);
+  return next(action);
+};
+
 const enhancer = composeEnhancers(
-  applyMiddleware(alias(aliases)),
-  applyMiddleware(thunk),
-  applyMiddleware(logger)
+  applyMiddleware(alias(aliases), thunk, logger)
 );
 
 export default function (initialState) {

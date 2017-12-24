@@ -1,2 +1,6 @@
 export const SUBSCRIBE_TO_PLAYLIST = 'SUBSCRIBE_TO_PLAYLIST';
 export const UNSUBSCRIBE_FROM_PLAYLIST = 'UNSUBSCRIBE_FROM_PLAYLIST';
+
+export const alias = { //TODO think of a better system for this...
+  SUBSCRIBE_TO_PLAYLIST: 'SUBSCRIBE_TO_PLAYLIST_ALIAS'
+};
