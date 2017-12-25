@@ -7,17 +7,6 @@ export default (state = {}, action) => {
   let playlistId, feedData, feedDataArr, newState;
 
   switch (action.type) {
-    case SubscriptionAction.SUBSCRIBE_TO_PLAYLIST:
-      playlistId = action.payload;
-
-      if (state[playlistId]) {
-        return state;
-      }
-
-      return {
-        ...state,
-        [playlistId]: {}
-      };
     case SubscriptionAction.UNSUBSCRIBE_FROM_PLAYLIST:
       playlistId = action.payload;
 
@@ -34,7 +23,7 @@ export default (state = {}, action) => {
       playlistId = get(feedData, 'yt:playlistId[0]');
 
       newState = { ...state };
-      newState[playlistId] = Object.assign(newState[playlistId], hydratePlaylist(playlistId, feedData));
+      newState[playlistId] = Object.assign({}, newState[playlistId], hydratePlaylist(playlistId, feedData));
 
       return newState;
     case PlaylistAction.HYDRATE_ALL_PLAYLISTS:
@@ -43,7 +32,7 @@ export default (state = {}, action) => {
 
       feedDataArr.forEach(feedData => {
         playlistId = get(feedData, 'yt:playlistId[0]');
-        newState[playlistId] = Object.assign(newState[playlistId], hydratePlaylist(playlistId, feedData));
+        newState[playlistId] = Object.assign({}, newState[playlistId], hydratePlaylist(playlistId, feedData));
       });
 
       return newState;
