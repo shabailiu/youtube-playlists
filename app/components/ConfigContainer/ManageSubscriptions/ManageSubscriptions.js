@@ -10,11 +10,10 @@ import List, {
   ListSubheader,
 } from 'material-ui/List';
 import { playlistShape } from '../../../constants/PropTypeValidation';
-import DeleteIcon from 'material-ui-icons/Delete';
-import IconButton from 'material-ui/IconButton';
 import Paper from 'material-ui/Paper';
 import { FormControl, FormHelperText } from 'material-ui/Form';
 import Input from 'material-ui/Input';
+import PlaylistListItem from './PlaylistListItem/PlaylistListItem';
 
 export class ManageSubscriptions extends Component {
   static propTypes = {
@@ -27,14 +26,10 @@ export class ManageSubscriptions extends Component {
 
     Object.keys(playlists).forEach(playlistId => {
       subs.push(
-        <ListItem key={playlistId}>
-          <ListItemText primary="Wi-Fis" />
-          <ListItemSecondaryAction>
-            <IconButton aria-label="Delete">
-              <DeleteIcon />
-            </IconButton>
-          </ListItemSecondaryAction>
-        </ListItem>
+        <PlaylistListItem
+          key={playlistId}
+          playlistDetails={playlists[playlistId]}
+        />
       );
     });
 
@@ -42,6 +37,8 @@ export class ManageSubscriptions extends Component {
   };
 
   render() {
+    const { playlists } = this.props;
+
     return (
       <div>
         <div id="add-playlist-wrapper">
@@ -58,7 +55,7 @@ export class ManageSubscriptions extends Component {
             </FormHelperText>
           </FormControl>
         </div>
-        <List subheader={<ListSubheader>Subscriptions</ListSubheader>}>
+        <List subheader={<ListSubheader>Subscriptions ({ Object.keys(playlists).length })</ListSubheader>}>
           {this.renderSubs()}
         </List>
       </div>
