@@ -1,28 +1,34 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { playlistShape } from '../../../../constants/PropTypeValidation';
-import List, {
+import {
   ListItem,
-  ListItemIcon,
   ListItemSecondaryAction,
   ListItemText,
-  ListSubheader,
 } from 'material-ui/List';
 import LinkIcon from 'material-ui-icons/Link';
 import DeleteIcon from 'material-ui-icons/Delete';
 import IconButton from 'material-ui/IconButton';
 import get from 'lodash/get';
+import { unsubscribeFromPlaylist } from '../../../../actions/SubscriptionActions';
 import './PlaylistListItem.less';
 
 export class PlaylistListItem extends Component {
   static propTypes = {
-    playlistDetails: PropTypes.shape(playlistShape)
+    playlistDetails: PropTypes.shape(playlistShape),
+    playlistId: PropTypes.string.isRequired,
+    unsubscribeFromPlaylist: PropTypes.func.isRequired
+  };
+
+  handleOnUnsubscribe = () => {
+    const { playlistId, unsubscribeFromPlaylist } = this.props;
+    unsubscribeFromPlaylist(playlistId);
   };
 
   render() {
     const {
       authorName,
-      authorUrl,
       playlistUrl,
       title,
       videos
@@ -42,10 +48,12 @@ export class PlaylistListItem extends Component {
           secondary={authorName}
         />
         <ListItemSecondaryAction>
-          <IconButton>
-            <LinkIcon />
-          </IconButton>
-          <IconButton aria-label="Delete">
+          <a href={playlistUrl} target="_blank">
+            <IconButton>
+              <LinkIcon />
+            </IconButton>
+          </a>
+          <IconButton aria-label="Delete" onClick={this.handleOnUnsubscribe}>
             <DeleteIcon />
           </IconButton>
         </ListItemSecondaryAction>
@@ -54,4 +62,10 @@ export class PlaylistListItem extends Component {
   }
 }
 
-export default PlaylistListItem;
+const mapDispatchToProps = dispatch => ({
+  unsubscribeFromPlaylist(playlistId) {
+    dispatch(unsubscribeFromPlaylist(playlistId));
+  }
+});
+
+export default connect(() => ({}), mapDispatchToProps)(PlaylistListItem);

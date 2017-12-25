@@ -1,12 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import TextField from 'material-ui/TextField';
 import List, {
-  ListItem,
-  ListItemIcon,
-  ListItemSecondaryAction,
-  ListItemText,
   ListSubheader,
 } from 'material-ui/List';
 import { playlistShape } from '../../../constants/PropTypeValidation';
@@ -29,6 +24,7 @@ export class ManageSubscriptions extends Component {
         <PlaylistListItem
           key={playlistId}
           playlistDetails={playlists[playlistId]}
+          playlistId={playlistId}
         />
       );
     });
@@ -67,4 +63,7 @@ const mapStateToProps = state => ({
   playlists: state.playlists
 });
 
-export default connect(mapStateToProps)(ManageSubscriptions);
+const mapDispatchToProps = dispatch => ({
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ManageSubscriptions);

@@ -8,7 +8,9 @@ import './VideoDisplay.less';
 
 export class VideoDisplay extends Component {
   static propTypes = {
-    playlists: PropTypes.shape(playlistShape).isRequired,
+    playlists: PropTypes.objectOf(PropTypes.shape(playlistShape)).isRequired,
+
+    // Passed in props
     videos: PropTypes.arrayOf(PropTypes.shape(videoShape))
   };
 
