@@ -8,16 +8,25 @@ import { readFeedAndHydrateAllPlaylists } from './actions/PlaylistActions';
 export class ConfigRoot extends Component {
   static propTypes = {
     hydrateAllPlaylists: PropTypes.func.isRequired,
+    isHydrated: PropTypes.bool,
     playlists: PropTypes.objectOf(PropTypes.shape(playlistShape)).isRequired,
 
     // Passed in props
     store: PropTypes.object.isRequired
   };
 
+  static defaultProps = {
+    isHydrated: false
+  };
+
   componentWillMount() {
-    const { hydrateAllPlaylists, playlists } = this.props;
-    const feedUrls = Object.values(playlists).map(playlist => playlist.feedUrl);
-    hydrateAllPlaylists(feedUrls);
+    const { hydrateAllPlaylists, isHydrated, playlists } = this.props;
+
+    // Only hydrate if state is empty
+    if (!isHydrated) {
+      const feedUrls = Object.values(playlists).map(playlist => playlist.feedUrl);
+      hydrateAllPlaylists(feedUrls);
+    }
   }
 
   render() {
@@ -33,6 +42,7 @@ export class ConfigRoot extends Component {
 }
 
 const mapStateToProps = state => ({
+  isHydrated: state.app.isHydrated,
   playlists: state.playlists
 });
 
