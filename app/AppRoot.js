@@ -1,7 +1,9 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Provider } from 'react-redux';
 import PlaylistContainer from './components/PlaylistContainer/PlaylistContainer';
 import SubscriptionButtonContainer from './components/SubscriptionButtonContainer/SubscriptionButtonContainer';
+// import 'semantic-ui-css/semantic.min.css';
 
 export const COMPONENT_TYPE = {
   PLAYLIST_CONTAINER: 'PLAYLIST_CONTAINER',

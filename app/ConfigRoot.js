@@ -1,11 +1,24 @@
-import React, { Component, PropTypes } from 'react';
-import { Provider } from 'react-redux';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect, Provider } from 'react-redux';
 import ConfigContainer from './components/ConfigContainer/ConfigContainer';
+import { playlistShape } from './constants/PropTypeValidation';
+import { readFeedAndHydrateAllPlaylists } from './actions/PlaylistActions';
 
-export default class ConfigRoot extends Component {
+export class ConfigRoot extends Component {
   static propTypes = {
+    hydrateAllPlaylists: PropTypes.func.isRequired,
+    playlists: PropTypes.objectOf(PropTypes.shape(playlistShape)).isRequired,
+
+    // Passed in props
     store: PropTypes.object.isRequired
   };
+
+  componentWillMount() {
+    const { hydrateAllPlaylists, playlists } = this.props;
+    const feedUrls = Object.values(playlists).map(playlist => playlist.feedUrl);
+    hydrateAllPlaylists(feedUrls);
+  }
 
   render() {
     console.debug('rendering ConfigRoot');
@@ -18,3 +31,15 @@ export default class ConfigRoot extends Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  playlists: state.playlists
+});
+
+const mapDispatchToProps = dispatch => ({
+  hydrateAllPlaylists(feedUrls) {
+    dispatch(readFeedAndHydrateAllPlaylists(feedUrls));
+  }
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ConfigRoot);

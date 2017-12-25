@@ -5,7 +5,7 @@ html
     meta(charset='UTF-8')
     title Redux TodoMVC Example (Window)
   body
-    #yt-playlists
+    #root
     if env !== 'prod'
       script(src='chrome-extension://lmhkpmbekcpmknklioeibfkpmmfibljd/js/redux-devtools-extension.js')
-    script(src=env == 'prod' ? '/js/inject.bundle.js' : 'http://localhost:3000/js/inject.bundle.js')
+    script(src=env == 'prod' ? '/js/configPanel.bundle.js' : 'http://localhost:3000/js/configPanel.bundle.js')

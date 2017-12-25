@@ -13,6 +13,8 @@ export const videoShape = {
 };
 
 export const playlistShape = {
+  authorName: PropTypes.string.isRequired,
+  authorUrl: PropTypes.string.isRequired,
   feedUrl: PropTypes.string,
   playlistUrl: PropTypes.string,
   title: PropTypes.string,

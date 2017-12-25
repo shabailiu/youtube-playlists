@@ -19,5 +19,5 @@
     "page": "background.html"
   },
   "permissions": [ "activeTab", "contextMenus", "management", "tabs", "storage", "webNavigation", "https://www.youtube.com/*" ],
-  "content_security_policy": "default-src 'self'; script-src 'self' http://localhost:3000 https://localhost:3000 'unsafe-eval'; connect-src http://localhost:3000 https://localhost:3000 https://www.youtube.com; style-src * 'unsafe-inline' 'self' blob:; img-src 'self' data:;"
+  "content_security_policy": "default-src 'self'; script-src 'self' http://localhost:3000 https://localhost:3000 http://localhost:8097 'unsafe-eval'; connect-src http://localhost:3000 https://localhost:3000 https://www.youtube.com wss://remotedev.io/socketcluster/; style-src * 'unsafe-inline' 'self' blob:; img-src 'self' data:;"
 }
