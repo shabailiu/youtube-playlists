@@ -1,6 +1,6 @@
 import * as AppAction from '../constants/AppConstants';
+import { FILTER_BY } from '../constants/AppConstants';
 import { HYDRATE_ALL_PLAYLISTS } from '../constants/PlaylistConstants';
-import { FILTER_BY } from '../components/VideoDisplayContainer/VideoDisplay/VideoDisplayUtils';
 
 export default (state = {
   filterBy: FILTER_BY.LAST_3_DAYS,

@@ -1,12 +1,5 @@
 import moment from 'moment';
-
-export const FILTER_BY = {
-  TODAY: 'TODAY',
-  LAST_3_DAYS: 'LAST_3_DAYS',
-  LAST_WEEK: 'LAST_WEEK',
-  LAST_MONTH: 'LAST_MONTH',
-  LAST_YEAR: 'LAST_YEAR'
-};
+import { FILTER_BY } from '../../../constants/AppConstants';
 
 const mapFilterToMoment = {
   [FILTER_BY.TODAY]: moment().subtract(1, 'day'),

@@ -5,10 +5,11 @@ import VideoDisplay from './VideoDisplay/VideoDisplay';
 import VideoDisplayHeader from './VideoDisplayHeader/VideoDisplayHeader';
 import { pickAllVideos } from '../../utils/playlists';
 import { Collapse } from 'react-collapse';
-import { filterVideos, FILTER_BY } from './VideoDisplay/VideoDisplayUtils';
+import { filterVideos } from './VideoDisplay/VideoDisplayUtils';
 import { playlistShape } from '../../constants/PropTypeValidation';
 import './VideoDisplayContainer.less';
 import LoadingIcon from '../LoadingIcon/LoadingIcon';
+import { FILTER_BY } from '../../constants/AppConstants';
 
 export class VideoDisplayContainer extends Component {
   static propTypes = {

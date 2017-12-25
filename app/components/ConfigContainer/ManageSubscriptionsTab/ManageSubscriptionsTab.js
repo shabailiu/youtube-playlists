@@ -8,11 +8,10 @@ import { playlistShape } from '../../../constants/PropTypeValidation';
 import AddPlaylist from './AddPlaylist/AddPlaylist';
 import PlaylistListItem from './PlaylistListItem/PlaylistListItem';
 import Snackbar from 'material-ui/Snackbar';
-import Button from 'material-ui/Button';
 import IconButton from 'material-ui/IconButton';
 import CloseIcon from 'material-ui-icons/Close';
 
-export class ManageSubscriptions extends Component {
+export class ManageSubscriptionsTab extends Component {
   static propTypes = {
     playlists: PropTypes.objectOf(PropTypes.shape(playlistShape))
   };
@@ -83,9 +82,6 @@ export class ManageSubscriptions extends Component {
           onClose={this.handleCloseSnackbar}
           message={snackBarMessage}
           action={[
-            <Button key="undo" color="accent" dense onClick={this.handleCloseSnackbar}>
-              UNDO
-            </Button>,
             <IconButton
               key="close"
               aria-label="Close"
@@ -108,4 +104,4 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ManageSubscriptions);
+export default connect(mapStateToProps, mapDispatchToProps)(ManageSubscriptionsTab);

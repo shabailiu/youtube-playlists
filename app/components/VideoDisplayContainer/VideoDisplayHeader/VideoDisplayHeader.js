@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import ClickableDropdown from '../../ClickableDropdown/ClickableDropdown';
-import { FILTER_BY } from '../VideoDisplay/VideoDisplayUtils';
 import { filterVideos } from '../../../actions/AppActions';
+import { FILTER_BY } from '../../../constants/AppConstants';
 
 const FILTER_BY_DISPLAY_VALUES = {
   [FILTER_BY.TODAY]: 'Today',

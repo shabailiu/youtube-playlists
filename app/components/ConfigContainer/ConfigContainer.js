@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import Paper from 'material-ui/Paper';
 import AppBar from 'material-ui/AppBar';
 import Tabs, { Tab } from 'material-ui/Tabs';
 import SubscriptionIcon from 'material-ui-icons/Subscriptions';
 import SettingsIcon from 'material-ui-icons/Build';
-import ManageSubscriptions from './ManageSubscriptions/ManageSubscriptions';
+import ManageSubscriptionsTab from './ManageSubscriptionsTab/ManageSubscriptionsTab';
+import SettingsTab from './SettingsTab/SettingsTab';
 import './ConfigContainer.less';
 import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
 import { red, blue } from 'material-ui/colors';
@@ -58,8 +58,8 @@ export class ConfigContainer extends Component {
               <Tab icon={<SettingsIcon />} />
             </Tabs>
           </AppBar>
-          {currTab === 0 && <ManageSubscriptions />}
-          {currTab === 1 && <div>Item Two</div>}
+          {currTab === 0 && <ManageSubscriptionsTab />}
+          {currTab === 1 && <SettingsTab />}
         </div>
       </MuiThemeProvider>
     );
