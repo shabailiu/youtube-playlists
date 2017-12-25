@@ -1,4 +1,4 @@
-import * as PlaylistAction from '../constants/PlaylistConstants';
+import * as PlaylistAction from './constants/PlaylistActionConstants';
 import { parseRSSFeed } from '../utils/playlists';
 import { fetchingPlaylists } from './AppActions';
 

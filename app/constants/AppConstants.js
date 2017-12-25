@@ -1,5 +1,3 @@
-export const FILTER_VIDEOS = 'FILTER_VIDEOS';
-export const FETCHING_PLAYLISTS = 'FETCHING_PLAYLISTS';
 export const FILTER_BY = {
   TODAY: 'TODAY',
   LAST_3_DAYS: 'LAST_3_DAYS',

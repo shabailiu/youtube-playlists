@@ -1,4 +1,4 @@
-import * as AppAction from '../constants/AppConstants';
+import * as AppAction from './constants/AppActionConstants';
 
 export const fetchingPlaylists = isFetching => ({
   type: AppAction.FETCHING_PLAYLISTS,

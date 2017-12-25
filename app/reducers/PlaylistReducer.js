@@ -1,5 +1,5 @@
-import * as PlaylistAction from '../constants/PlaylistConstants';
-import * as SubscriptionAction from '../constants/SubscriptionConstants';
+import * as PlaylistAction from '../actions/constants/PlaylistActionConstants';
+import * as SubscriptionAction from '../actions/constants/SubscriptionActionConstants';
 import { parsePlaylistDetails } from '../utils/playlists';
 import get from 'lodash/get';
 

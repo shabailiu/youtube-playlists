@@ -1,4 +1,4 @@
-import * as SubscriptionAction from '../constants/SubscriptionConstants';
+import * as SubscriptionAction from './constants/SubscriptionActionConstants';
 import { readFeedAndHydratePlaylist } from './PlaylistActions';
 import { getPlaylistFeedUrl } from '../utils/playlists';
 

@@ -1,5 +1,5 @@
 import moment from 'moment';
-import { FILTER_BY } from '../../../constants/AppConstants';
+import { FILTER_BY } from '../../../actions/constants/AppActionConstants';
 
 const mapFilterToMoment = {
   [FILTER_BY.TODAY]: moment().subtract(1, 'day'),

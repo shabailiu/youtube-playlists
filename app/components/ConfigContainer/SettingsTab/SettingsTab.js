@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import List, {
   ListSubheader,
   ListItem,
@@ -15,7 +16,7 @@ import { FILTER_BY } from '../../../constants/AppConstants';
 
 export class SettingsTab extends Component {
   static propTypes = {};
-  
+
   render() {
     return (
       <div>

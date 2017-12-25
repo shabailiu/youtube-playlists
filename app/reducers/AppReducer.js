@@ -1,6 +1,6 @@
-import * as AppAction from '../constants/AppConstants';
+import * as AppAction from '../actions/constants/AppActionConstants';
 import { FILTER_BY } from '../constants/AppConstants';
-import { HYDRATE_ALL_PLAYLISTS } from '../constants/PlaylistConstants';
+import { HYDRATE_ALL_PLAYLISTS } from '../actions/constants/PlaylistActionConstants';
 
 export default (state = {
   filterBy: FILTER_BY.LAST_3_DAYS,
