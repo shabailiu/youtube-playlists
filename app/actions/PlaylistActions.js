@@ -16,12 +16,13 @@ const readFeedAndHydratePlaylistImpl = action => {
     if (!feedData) {
       try {
         feedData = await parseRSSFeed(feedUrl);
+        feedData = feedData.feed;
       } catch (err) {
         console.error('Error in readFeedAndHydratePlaylist:', err);
       }
     }
 
-    dispatch(hydratePlaylist(feedData.feed));
+    dispatch(hydratePlaylist(feedData));
   };
 };
 

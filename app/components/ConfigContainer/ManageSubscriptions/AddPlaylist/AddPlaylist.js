@@ -5,7 +5,8 @@ import Paper from 'material-ui/Paper';
 import { FormControl, FormHelperText } from 'material-ui/Form';
 import Input from 'material-ui/Input';
 import { subscribeToPlaylist } from '../../../../actions/SubscriptionActions';
-import { parseRSSFeed, getPlaylistFeedUrl } from '../../../../utils/playlists';
+import { parseRSSFeed, getPlaylistFeedUrl, parsePlaylistDetails } from '../../../../utils/playlists';
+import { playlistShape } from '../../../../constants/PropTypeValidation';
 import './AddPlaylist.less';
 
 const extractPlaylistId = input => {
@@ -14,7 +15,13 @@ const extractPlaylistId = input => {
 };
 
 export class AddPlaylist extends Component {
-  static propTypes = {};
+  static propTypes = {
+    addPlaylist: PropTypes.func.isRequired,
+    playlists: PropTypes.objectOf(PropTypes.shape(playlistShape)),
+
+    // Passed in props
+    onSubscriptionAdded: PropTypes.func
+  };
 
   constructor() {
     super();
@@ -34,7 +41,7 @@ export class AddPlaylist extends Component {
 
   handleAddPlaylist = event => {
     event.preventDefault();
-    const { addPlaylist, playlists } = this.props;
+    const { addPlaylist, onSubscriptionAdded, playlists } = this.props;
     const formData = new FormData(event.target);
     const playlistId = extractPlaylistId(formData.get('add-playlist'));
 
@@ -49,7 +56,9 @@ export class AddPlaylist extends Component {
     // Check if the playlist exists
     parseRSSFeed(getPlaylistFeedUrl(playlistId)).then(
       feedData => {
+        feedData = feedData.feed;
         addPlaylist(playlistId, feedData);
+        onSubscriptionAdded && onSubscriptionAdded(playlistId, parsePlaylistDetails(playlistId, feedData));
 
         this.setState({
           hasError: false,

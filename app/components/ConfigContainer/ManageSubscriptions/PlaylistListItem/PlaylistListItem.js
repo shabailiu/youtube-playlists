@@ -16,14 +16,24 @@ import './PlaylistListItem.less';
 
 export class PlaylistListItem extends Component {
   static propTypes = {
+    unsubscribeFromPlaylist: PropTypes.func.isRequired,
+
+    // Passed in props
+    onSubscriptionRemoved: PropTypes.func,
     playlistDetails: PropTypes.shape(playlistShape),
-    playlistId: PropTypes.string.isRequired,
-    unsubscribeFromPlaylist: PropTypes.func.isRequired
+    playlistId: PropTypes.string.isRequired
   };
 
   handleOnUnsubscribe = () => {
-    const { playlistId, unsubscribeFromPlaylist } = this.props;
+    const {
+      onSubscriptionRemoved,
+      playlistDetails,
+      playlistId,
+      unsubscribeFromPlaylist
+    } = this.props;
+
     unsubscribeFromPlaylist(playlistId);
+    onSubscriptionRemoved && onSubscriptionRemoved(playlistId, playlistDetails);
   };
 
   render() {

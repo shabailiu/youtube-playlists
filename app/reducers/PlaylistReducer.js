@@ -1,6 +1,6 @@
 import * as PlaylistAction from '../constants/PlaylistConstants';
 import * as SubscriptionAction from '../constants/SubscriptionConstants';
-import { hydratePlaylist } from '../utils/playlists';
+import { parsePlaylistDetails } from '../utils/playlists';
 import get from 'lodash/get';
 
 export default (state = {}, action) => {
@@ -23,7 +23,7 @@ export default (state = {}, action) => {
       playlistId = get(feedData, 'yt:playlistId[0]');
 
       newState = { ...state };
-      newState[playlistId] = Object.assign({}, newState[playlistId], hydratePlaylist(playlistId, feedData));
+      newState[playlistId] = Object.assign({}, newState[playlistId], parsePlaylistDetails(playlistId, feedData));
 
       return newState;
     case PlaylistAction.HYDRATE_ALL_PLAYLISTS:
@@ -32,7 +32,7 @@ export default (state = {}, action) => {
 
       feedDataArr.forEach(feedData => {
         playlistId = get(feedData, 'yt:playlistId[0]');
-        newState[playlistId] = Object.assign({}, newState[playlistId], hydratePlaylist(playlistId, feedData));
+        newState[playlistId] = Object.assign({}, newState[playlistId], parsePlaylistDetails(playlistId, feedData));
       });
 
       return newState;
