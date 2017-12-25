@@ -2,20 +2,26 @@ import * as PlaylistAction from '../constants/PlaylistConstants';
 import { parseRSSFeed } from '../utils/playlists';
 import { fetchingPlaylists } from './AppActions';
 
-export const readFeedAndHydratePlaylist = feedUrl => ({
+export const readFeedAndHydratePlaylist = (feedUrl, feedData = {}) => ({
   type: PlaylistAction.alias.READ_FEED_AND_HYDRATE_PLAYLIST,
-  payload: feedUrl
+  payload: {
+    feedUrl,
+    feedData
+  }
 });
 
 const readFeedAndHydratePlaylistImpl = action => {
-  const feedUrl = action.payload;
+  let { feedUrl, feedData } = action.payload;
   return async (dispatch) => {
-    try {
-      const feedData = await parseRSSFeed(feedUrl);
-      dispatch(hydratePlaylist(feedData.feed));
-    } catch (err) {
-      console.error('Error in readFeedAndHydratePlaylist:', err);
+    if (!feedData) {
+      try {
+        feedData = await parseRSSFeed(feedUrl);
+      } catch (err) {
+        console.error('Error in readFeedAndHydratePlaylist:', err);
+      }
     }
+
+    dispatch(hydratePlaylist(feedData.feed));
   };
 };
 

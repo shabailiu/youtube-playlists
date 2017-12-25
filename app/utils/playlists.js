@@ -4,7 +4,14 @@ import get from 'lodash/get';
 import moment from 'moment';
 
 export const parseRSSFeed = async (feed) => {
-  const feedsResponse = await axios.get(feed);
+  let feedsResponse;
+
+  try {
+    feedsResponse = await axios.get(feed);
+  } catch (err) {
+    return Promise.reject(`Error reading feed (${feed}): ${err}`);
+  }
+
   const unparsedXml = feedsResponse.data;
 
   return new Promise((resolve, reject) => {
