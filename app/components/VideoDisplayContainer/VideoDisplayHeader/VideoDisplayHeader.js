@@ -3,15 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import ClickableDropdown from '../../ClickableDropdown/ClickableDropdown';
 import { filterVideos } from '../../../actions/AppActions';
-import { FILTER_BY } from '../../../constants/AppConstants';
-
-const FILTER_BY_DISPLAY_VALUES = {
-  [FILTER_BY.TODAY]: 'Today',
-  [FILTER_BY.LAST_3_DAYS]: 'Past 3 days',
-  [FILTER_BY.LAST_WEEK]: 'Past week',
-  [FILTER_BY.LAST_MONTH]: 'Past month',
-  [FILTER_BY.LAST_YEAR]: 'Past year'
-};
+import { FILTER_BY, FILTER_BY_DISPLAY_VALUES } from '../../../constants/AppConstants';
 
 export class VideoDisplayHeader extends Component {
   static propTypes = {

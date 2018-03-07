@@ -12,12 +12,20 @@ import { FormControl } from 'material-ui/Form';
 import Input, { InputLabel } from 'material-ui/Input';
 import Select from 'material-ui/Select';
 import { MenuItem } from 'material-ui/Menu';
-import { FILTER_BY } from '../../../constants/AppConstants';
+import { FILTER_BY, FILTER_BY_DISPLAY_VALUES } from '../../../constants/AppConstants';
 
 export class SettingsTab extends Component {
-  static propTypes = {};
+  static propTypes = {
+    filterBy: PropTypes.oneOf(Object.values(FILTER_BY))
+  };
+
+  handleChangeFilterBy = event => {
+    console.log('e', event.target);
+  };
 
   render() {
+    const { filterBy } = this.props;
+
     return (
       <div>
         <List subheader={<ListSubheader>Settings</ListSubheader>}>
@@ -27,18 +35,16 @@ export class SettingsTab extends Component {
             />
             <ListItemSecondaryAction>
               <FormControl>
-                <InputLabel htmlFor="age-simple">Age</InputLabel>
                 <Select
-                  value={this.state.age}
-                  onChange={this.handleChange}
-                  input={<Input name="age" id="age-simple" />}
+                  value={filterBy}
+                  onChange={this.handleChangeFilterBy}
+                  input={<Input name="filterBy" />}
                 >
-                  <MenuItem value="">
-                    <em>None</em>
-                  </MenuItem>
-                  <MenuItem value={10}>Ten</MenuItem>
-                  <MenuItem value={20}>Twenty</MenuItem>
-                  <MenuItem value={30}>Thirty</MenuItem>
+                  {
+                    Object.keys(FILTER_BY_DISPLAY_VALUES).map(filter => (
+                      <MenuItem key={filter} value={filter}>{FILTER_BY_DISPLAY_VALUES[filter]}</MenuItem>
+                    ))
+                  }
                 </Select>
               </FormControl>
             </ListItemSecondaryAction>
@@ -50,11 +56,13 @@ export class SettingsTab extends Component {
 }
 
 const mapStateToProps = state => ({
-
+  filterBy: state.app.filterBy
 });
 
 const mapDispatchToProps = dispatch => ({
-
+  changeFilterBy(newFilter) {
+    dispatch();
+  }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SettingsTab);
