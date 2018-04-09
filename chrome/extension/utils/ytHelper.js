@@ -32,7 +32,8 @@ export const getPageType = url => {
 export const isPageLoaded = pageType => {
   switch (pageType) {
     case PAGE_TYPE.SUBSCRIPTION_HOME:
-      return !!document.querySelector('#browse-items-primary > .section-list');
+      // return !!document.querySelector('#browse-items-primary > .section-list');
+      return !!document.querySelector('ytd-two-column-browse-results-renderer ytd-section-list-renderer ytd-shelf-renderer');
     case PAGE_TYPE.USER_HOME:
       const homeTab = document.querySelector('#channel-navigation-menu .epic-nav-item-heading[aria-label="Home tab"]');
       return homeTab && homeTab.getAttribute('aria-selected');
@@ -42,4 +43,12 @@ export const isPageLoaded = pageType => {
     case PAGE_TYPE.PLAYLIST_HOME:
       return !!document.getElementById('pl-header');
   }
+};
+
+/**
+ * Determine if an AJAX request URL is for a page load
+ */
+export const isAJAXPageRequest = request => {
+  const urlPattern = /^https:\/\/www\.youtube\.com/;
+  return request.type === 'xmlhttprequest' && !!request.url.match(urlPattern);
 };

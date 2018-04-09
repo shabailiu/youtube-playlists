@@ -18,7 +18,7 @@ const readFeedAndHydratePlaylistImpl = action => {
         feedData = await parseRSSFeed(feedUrl);
         feedData = feedData.feed;
       } catch (err) {
-        console.error('Error in readFeedAndHydratePlaylist:', err);
+        console.error('[ytp] Error in readFeedAndHydratePlaylist:', err);
       }
     }
 
@@ -47,7 +47,7 @@ const readFeedAndHydrateAllPlaylistsImpl = action => {
         dispatch(hydrateAllPlaylists(feedData));
       });
     } catch (err) {
-      console.error('Error in readFeedAndHydrateAllPlaylists:', err);
+      console.error('[ytp] Error in readFeedAndHydrateAllPlaylists:', err);
     }
   };
 };

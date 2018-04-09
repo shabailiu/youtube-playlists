@@ -18,6 +18,6 @@
   "background": {
     "page": "background.html"
   },
-  "permissions": [ "activeTab", "contextMenus", "tabs", "storage", "webNavigation", "https://www.youtube.com/*" ],
+  "permissions": [ "activeTab", "contextMenus", "tabs", "storage", "webNavigation", "webRequest", "*://*.youtube.com/*" ],
   "content_security_policy": "default-src 'self'; script-src 'self'; style-src * 'unsafe-inline'; connect-src https://www.youtube.com; img-src 'self' data: https://*.ytimg.com;"
 }

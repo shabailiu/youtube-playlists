@@ -19,11 +19,13 @@ export class PlaylistContainer extends Component {
 
   render() {
     return (
-      <ol className="item-section">
-        <li>
-          <VideoDisplayContainer />
-        </li>
-      </ol>
+      <div className="style-scope ytd-section-list-renderer">
+        <div className="style-scope ytd-item-section-renderer">
+          <div className="style-scope ytd-shelf-renderer">
+            <VideoDisplayContainer />
+          </div>
+        </div>
+      </div>
     );
   }
 }

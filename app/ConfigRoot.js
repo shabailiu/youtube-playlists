@@ -30,7 +30,7 @@ export class ConfigRoot extends Component {
   }
 
   render() {
-    console.debug('rendering ConfigRoot');
+    console.debug('[ytp] rendering ConfigRoot');
     const { store } = this.props;
 
     return (

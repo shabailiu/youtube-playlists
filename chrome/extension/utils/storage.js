@@ -13,7 +13,7 @@ export const saveStorage = storage => {
       if (chrome.runtime.lastError) {
         reject(chrome.runtime.lastError);
       } else {
-        console.log('Storage saved', storage);
+        console.log('[ytp] Storage saved', storage);
         resolve();
       }
     });
@@ -26,7 +26,7 @@ export const retrieveStorage = () => {
       if (chrome.runtime.lastError) {
         reject(chrome.runtime.lastError);
       } else {
-        console.log('Storage retrieved', storage[STATE_KEY]);
+        console.log('[ytp] Storage retrieved', storage[STATE_KEY]);
         resolve(storage[STATE_KEY]);
       }
     });

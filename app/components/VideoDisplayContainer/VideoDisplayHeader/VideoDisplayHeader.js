@@ -60,10 +60,10 @@ export class VideoDisplayHeader extends Component {
     }));
 
     return (
-      <div className="shelf-title-table">
-        <div className="shelf-title-row">
-          <h2 className="branded-page-module-title shelf-title-cell">
-            <span className="branded-page-module-title-text">Playlist Subscriptions</span>
+      <div className="grid-subheader style-scope ytd-shelf-renderer">
+        <div id="title-container" className="style-scope ytd-shelf-renderer">
+          <h2 className="style-scope ytd-shelf-renderer">
+            <span id="title" className="branded-page-module-title-text">Playlist Subscriptions</span>
           </h2>
           <div className="menu-container shelf-title-cell">
             <div className="yt-uix-menu-container feed-item-action-menu">

@@ -20,7 +20,7 @@ export class SettingsTab extends Component {
   };
 
   handleChangeFilterBy = event => {
-    console.log('e', event.target);
+    console.log('[ytp] e', event.target);
   };
 
   render() {

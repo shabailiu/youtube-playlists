@@ -18,7 +18,7 @@ export default class AppRoot extends Component {
   };
 
   render() {
-    console.debug('rendering AppRoot');
+    console.debug('[ytp] rendering AppRoot');
     const { store, type, ...rest } = this.props;
     let app;
 

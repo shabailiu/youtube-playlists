@@ -5,10 +5,11 @@ import get from 'lodash/get';
 import isEmpty from 'lodash/isEmpty';
 
 export const renderPlaylistContainer = store => {
-  const reactRoot = document.createElement('li');
+  const reactRoot = document.createElement('div');
   reactRoot.id = 'yt-playlists';
 
-  const eltToInject = document.querySelector('#browse-items-primary > ol'); //TODO put this in config
+  const eltToInject = document.querySelector('ytd-browse ytd-section-list-renderer > #contents');
+
   if (eltToInject) {
     eltToInject.insertBefore(reactRoot, eltToInject.firstChild);
   } else {
@@ -34,13 +35,13 @@ export const renderSubscriptionButtons = store => {
     // Get the playlist ID from the anchor tag
     const anchor = elt.querySelector('a'); //TODO error handling
     if (!anchor) {
-      return console.error('renderSubscriptionButtons: Unable to find anchor tag in:', elt);
+      return console.error('[ytp] renderSubscriptionButtons: Unable to find anchor tag in:', elt);
     }
 
     const playlistLink = anchor.href;
     const matches = playlistLink.match(/list=(.+)$/); //TODO error handling
     if (isEmpty(matches)) {
-      return console.error('renderSubscriptionButtons: Unable to retrieve playlist ID from link:', playlistLink);
+      return console.error('[ytp] renderSubscriptionButtons: Unable to retrieve playlist ID from link:', playlistLink);
     }
 
     const playlistId = matches[1];

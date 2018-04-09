@@ -1,4 +1,5 @@
 import { mapUrlToPageType } from '../utils/ytHelper';
+import { MESSAGE_TYPE } from '../constants';
 
 function isInjected(tabId) {
   return chrome.tabs.executeScriptAsync(tabId, {
@@ -33,6 +34,7 @@ function loadScript(name, tabId, cb) {
 }
 
 const urlTrack = {};
+const listeners = {};
 
 chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
   if (changeInfo.status !== 'loading') {
@@ -40,23 +42,54 @@ chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
   }
 
   if (tab.url.match(Object.keys(mapUrlToPageType).join('|'))) {
+    // Check if script has already been injected (has the page refreshed?)
     const result = await isInjected(tabId);
 
     if (!chrome.runtime.lastError && !result[0]) {
-      return loadScript('inject', tabId, () => console.log('load inject bundle success!'));
+      // Add listener for AJAX requests to determine if the page has changed
+      if (!listeners[tabId]) {
+        console.debug(`[ytp] adding AJAX listener for page events for tabId ${tabId}`);
+        listeners[tabId] = details => {
+          chrome.tabs.sendMessage(tabId, {
+            type: MESSAGE_TYPE.AJAX_RESPONSE,
+            payload: {
+              ...details
+            }
+          }, function(response) {
+            console.log(response);
+          });
+        };
+
+        chrome.webRequest.onCompleted.addListener(listeners[tabId], { urls: ["*://*.youtube.com/*"] });
+      }
+
+      // Load script
+      console.debug('[ytp] loading bundle...');
+      return loadScript('inject', tabId, () => console.log('[ytp] load inject bundle success!'));
     } else {
       if (result[0]) { // Bundle already loaded
         // Check if the URL has changed
         if (urlTrack[tabId] === tab.url) {
-          console.debug('url has not changed; ignoring');
+          console.debug('[ytp] url has not changed; ignoring');
           return;
         }
 
         urlTrack[tabId] = tab.url;
-        chrome.tabs.sendMessage(tabId, { execute: true });
+        chrome.tabs.sendMessage(tabId, {
+          type: MESSAGE_TYPE.EXECUTE_SCRIPT,
+          payload: true
+        });
       } else {
-        console.debug(`failed to load script; lastError (${chrome.runtime.lastError})`);
+        console.debug(`[ytp] failed to load script; lastError (${chrome.runtime.lastError})`);
       }
     }
+  }
+});
+
+chrome.tabs.onRemoved.addListener(tabId => {
+  if (listeners[tabId]) {
+    console.debug(`[ytp] removing AJAX listener for tabId ${tabId}`);
+    chrome.webRequest.onComplete.removeListener(listeners[tabId]);
+    delete listeners[tabId];
   }
 });
