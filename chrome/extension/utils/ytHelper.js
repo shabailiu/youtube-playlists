@@ -49,6 +49,15 @@ export const isPageLoaded = pageType => {
  * Determine if an AJAX request URL is for a page load
  */
 export const isAJAXPageRequest = request => {
-  const urlPattern = /^https:\/\/www\.youtube\.com/;
-  return request.type === 'xmlhttprequest' && !!request.url.match(urlPattern);
+  const invalidPaths = [
+    'service_ajax'
+  ];
+
+  try {
+    const urlObj = new URL(request.url);
+    return request.type === 'xmlhttprequest' && !urlObj.pathname.match(invalidPaths.join('|'));
+  } catch (err) {
+    console.error(`[ytp] unable to parse URL (${request && request.url})`);
+    return false;
+  }
 };

@@ -55,8 +55,6 @@ chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
             payload: {
               ...details
             }
-          }, function(response) {
-            console.log(response);
           });
         };
 
@@ -68,7 +66,7 @@ chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
       return loadScript('inject', tabId, () => console.log('[ytp] load inject bundle success!'));
     } else {
       if (result[0]) { // Bundle already loaded
-        // Check if the URL has changed
+        // Check if the URL has changed TODO: is this still valid code?
         if (urlTrack[tabId] === tab.url) {
           console.debug('[ytp] url has not changed; ignoring');
           return;

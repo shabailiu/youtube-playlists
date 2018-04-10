@@ -5,26 +5,23 @@ import get from 'lodash/get';
 import isEmpty from 'lodash/isEmpty';
 
 export const renderPlaylistContainer = store => {
-  const reactRoot = document.createElement('div');
-  reactRoot.id = 'yt-playlists';
-
-  const eltToInject = document.querySelector('ytd-browse ytd-section-list-renderer > #contents');
+  const eltToInject = document.querySelector('ytd-browse > ytd-two-column-browse-results-renderer > ytd-section-list-renderer > #contents');
 
   if (eltToInject) {
+    const reactRoot = document.createElement('div');
+    reactRoot.id = 'ytp';
     eltToInject.insertBefore(reactRoot, eltToInject.firstChild);
-  } else {
-    document.body.appendChild(reactRoot);
-  }
 
-  store.ready().then(() => {
-    ReactDOM.render(
-      <Root
-        store={store}
-        type={COMPONENT_TYPE.PLAYLIST_CONTAINER}
-      />,
-      document.querySelector('#yt-playlists')
-    );
-  });
+    store.ready().then(() => {
+      ReactDOM.render(
+        <Root
+          store={store}
+          type={COMPONENT_TYPE.PLAYLIST_CONTAINER}
+        />,
+        document.querySelector('#ytp')
+      );
+    });
+  }
 };
 
 export const renderSubscriptionButtons = store => {
@@ -47,7 +44,7 @@ export const renderSubscriptionButtons = store => {
     const playlistId = matches[1];
 
     const reactRoot = document.createElement('div');
-    reactRoot.className = 'yt-playlists-sub-btn-root';
+    reactRoot.className = 'ytp-sub-btn-root';
     reactRoot.dataset.playlistid = playlistId;
     elt.appendChild(reactRoot);
     reactRoots.push(reactRoot);
@@ -78,7 +75,7 @@ export const renderProminentSubscriptionButton = store => {
   const playlistId = get(plHeader, 'dataset.fullListId');
 
   const reactRoot = document.createElement('div');
-  reactRoot.className = 'yt-playlists-sub-btn-root';
+  reactRoot.className = 'ytp-sub-btn-root';
   reactRoot.dataset.playlistid = playlistId;
   eltToInject.appendChild(reactRoot);
 

@@ -5,7 +5,7 @@ import './LoadingIcon.less';
 export class LoadingIcon extends Component {
   render() {
     return (
-      <div className="yt-playlists-loading-icon">
+      <div className="ytp-loading-icon">
         <div className="bounce1" />
         <div className="bounce2" />
         <div className="bounce3" />

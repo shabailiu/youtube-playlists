@@ -1,7 +1,7 @@
 import React from 'react';
 import { COMPONENT_TYPE } from '../../app/AppRoot';
 import * as RenderReactRoot from './utils/renderRoot';
-import { getPageType, isPageLoaded, mapPageTypeToComponents, mapUrlToPageType } from './utils/ytHelper';
+import { getPageType, isAJAXPageRequest, isPageLoaded, mapPageTypeToComponents, mapUrlToPageType } from './utils/ytHelper';
 import { Store } from 'react-chrome-redux';
 import { MESSAGE_TYPE } from './constants';
 
@@ -9,11 +9,12 @@ console.debug('[ytp] extension/inject loaded from:', location.href);
 const maxLoops = 40;
 
 const executeScript = () => {
-  const pageType = getPageType(location.href);
-  console.debug(`[ytp] PAGE_TYPE (${location.href})`, pageType);
-  const componentTypes = mapPageTypeToComponents[pageType] || [];
-  let loaded = false;
-  let i = 0;
+  const store = new Store({
+    portName: 'MY_APP'
+  });
+
+  console.debug('[ytp] executing script');
+  RenderReactRoot.renderPlaylistContainer(store);
 };
 
 const injectElementIntoPage = (componentType, store) => {
@@ -41,7 +42,9 @@ chrome.runtime.onMessage.addListener((message = {}, sender, sendResponse) => {
       }
       break;
     case MESSAGE_TYPE.AJAX_RESPONSE:
-      console.log('[ytp] got req ', message);
+      if (isAJAXPageRequest(payload)) {
+        console.log('[ytp] got req ', message);
+      }
       break;
   }
 });

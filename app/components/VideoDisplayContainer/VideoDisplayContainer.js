@@ -30,7 +30,7 @@ export class VideoDisplayContainer extends Component {
     // TODO: This is kinda hacky - this animates the initial render, but is very slow
     setTimeout(() => {
       this.setState({
-        height: document.getElementById('yt-playlists-video-list').clientHeight
+        height: document.getElementById('ytp-video-list').clientHeight
       });
     }, 100);
 
@@ -47,30 +47,27 @@ export class VideoDisplayContainer extends Component {
     const filteredVideos = filterVideos(videos, 12, filterBy);
 
     const loadingScreen = (
-      <div className="yt-playlists-loading-screen">
+      <div className="ytp-loading-screen">
         <LoadingIcon />
       </div>
     );
 
     return (
       <div
-        id="yt-playlists-video-list-wrapper"
+        id="ytp-video-list-wrapper"
         style={{ height: this.state.height }}
       >
         <div
-          id="yt-playlists-video-list"
-          className="feed-item-container browse-list-item-container yt-section-hover-container compact-shelf shelf-item branded-page-box clearfix"
+          id="ytp-video-list"
         >
-          <div className="feed-item-dismissable">
-            <VideoDisplayHeader />
-            {isFetching ? loadingScreen : (
-              <Collapse isOpened={true}>
-                <VideoDisplay
-                  videos={filteredVideos}
-                />
-              </Collapse>
-            )}
-          </div>
+          <VideoDisplayHeader />
+          {isFetching ? loadingScreen : (
+            <Collapse isOpened={true}>
+              <VideoDisplay
+                videos={filteredVideos}
+              />
+            </Collapse>
+          )}
         </div>
       </div>
     );

@@ -1,15 +1,51 @@
-#yt-playlists {
-    .yt-thumb-simple {
-        height: 109px;
+.ytp-VideoGridCard {
+    width: 210px;
+
+    > a {
+        text-decoration: none;
+    }
+    .ytp-VideoGridCard-thumbnail {
+        height: 118px;
         overflow: hidden;
         display: inline-block;
 
         img {
             display: block;
             height: auto;
-            width: 196px;
+            width: 210px;
             position: relative;
             top: -19px;
+        }
+    }
+    .ytp-VideoGridCard-title {
+        font-size: 1.4rem;
+        font-weight: 500;
+        line-height: 1.6rem;
+        color: #111;
+        margin: 8px 0 8px;
+    }
+    .ytp-VideoGridCard-channel {
+        a {
+            font-size: 1.3rem;
+            font-weight: 400;
+            line-height: 1.8rem;
+            color: lighten(#111, 40%);
+            text-decoration: none;
+
+            &:hover {
+                color: lighten(#111, 10%);
+            }
+        }
+    }
+    .ytp-VideoGridCard-meta {
+        font-size: 1.3rem;
+        font-weight: 400;
+        line-height: 1.8rem;
+        color: lighten(#111, 40%);
+
+        span:not(:last-of-type):after {
+            content: '•';
+            margin: 0 4px;
         }
     }
 }

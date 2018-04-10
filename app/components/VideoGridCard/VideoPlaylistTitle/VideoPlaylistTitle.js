@@ -13,7 +13,7 @@ export class VideoPlaylistTitle extends Component {
 
   render() {
     return (
-      <span className="yt-badge standalone-collection-badge-renderer-icon">{this.props.title}</span>
+      <div className="ytp-VideoPlaylistTitle">{this.props.title}</div>
     );
   }
 }

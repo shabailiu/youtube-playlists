@@ -59,7 +59,7 @@ export class SubscriptionButton extends Component {
     }
 
     return (
-      <div className="yt-playlists-sub-btn">
+      <div className="ytp-sub-btn">
         {button}
       </div>
     );

@@ -28,21 +28,17 @@ export class VideoDisplay extends Component {
 
     videos.forEach(video => {
       videoArr.push(
-        <li
+        <VideoGridCard
           key={video.videoId}
-          className="yt-shelf-grid-item"
-        >
-          <VideoGridCard
-            playlistTitle={playlists[video.playlistId].title}
-            {...video}
-          />
-        </li>
+          playlistTitle={playlists[video.playlistId].title}
+          {...video}
+        />
       );
     });
 
     return (
-      <div className="multirow-shelf">
-        <ul className="shelf-content">{videoArr}</ul>
+      <div>
+        {videoArr}
       </div>
     );
   }

@@ -19,39 +19,6 @@ export class VideoDisplayHeader extends Component {
   render() {
     const { filterBy } = this.props;
 
-    const switchView = (
-      <div className="yt-uix-menu-container feed-item-action-menu">
-        <ul className="yt-uix-menu-top-level-button-container">
-          <li className="yt-uix-menu-top-level-button yt-uix-menu-top-level-flow-button">
-            <button
-              className="yt-uix-button yt-uix-button-size-default yt-uix-button-opacity yt-uix-button-empty yt-uix-button-has-icon yt-uix-tooltip"
-              type="button"
-              onClick={false}
-              aria-label="Switch to grid view"
-              title="Grid"
-              disabled="True"
-            >
-              <span className="yt-uix-button-icon-wrapper">
-                <span className="yt-uix-button-icon yt-uix-button-icon-view-module yt-sprite" />
-              </span>
-            </button>
-          </li>
-          <li className="yt-uix-menu-top-level-button yt-uix-menu-top-level-flow-button">
-            <a
-              href="/feed/subscriptions?flow=2"
-              className="yt-uix-button   yt-uix-sessionlink yt-uix-button-opacity yt-uix-button-size-default yt-uix-button-has-icon yt-uix-tooltip yt-uix-button-empty"
-              aria-label="Switch to list view"
-              title="List"
-            >
-              <span className="yt-uix-button-icon-wrapper">
-                <span className="yt-uix-button-icon yt-uix-button-icon-view-list yt-sprite" />
-              </span>
-            </a>
-          </li>
-        </ul>
-      </div>
-    );
-
     const filterByItems = Object.keys(FILTER_BY).map(filter => ({
       id: filter,
       text: FILTER_BY_DISPLAY_VALUES[filter],
@@ -60,13 +27,11 @@ export class VideoDisplayHeader extends Component {
     }));
 
     return (
-      <div className="grid-subheader style-scope ytd-shelf-renderer">
-        <div id="title-container" className="style-scope ytd-shelf-renderer">
-          <h2 className="style-scope ytd-shelf-renderer">
-            <span id="title" className="branded-page-module-title-text">Playlist Subscriptions</span>
-          </h2>
-          <div className="menu-container shelf-title-cell">
-            <div className="yt-uix-menu-container feed-item-action-menu">
+      <div>
+        <div className="ytp-title-container">
+          <h2>Playlist Subscriptions</h2>
+          <div>
+            <div>
               Show:&nbsp;&nbsp;
               <ClickableDropdown
                 items={filterByItems}

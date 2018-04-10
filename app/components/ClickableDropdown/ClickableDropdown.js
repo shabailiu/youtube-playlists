@@ -53,11 +53,7 @@ export class ClickableDropdown extends Component {
             id={item.id}
             onClick={this.handleClick}
           >
-            <span
-              className=" yt-uix-button-menu-item spf-link"
-            >
-              {item.text}
-            </span>
+            {item.text}
           </ClickableDropdownItem>
         </li>
       );
@@ -65,12 +61,8 @@ export class ClickableDropdown extends Component {
 
     return (
       <button
-        aria-expanded="false"
-        className="subnav-flow-menu yt-uix-button yt-uix-button-default yt-uix-button-size-default"
-        aria-haspopup="true"
         type="button"
         onClick={false}
-        data-button-menu-indicate-selected="true"
       >
         <span className="yt-uix-button-content">
           {currSelected}
