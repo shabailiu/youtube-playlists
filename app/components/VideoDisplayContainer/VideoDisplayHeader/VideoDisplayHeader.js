@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import ClickableDropdown from '../../ClickableDropdown/ClickableDropdown';
 import { filterVideos } from '../../../actions/AppActions';
 import { FILTER_BY, FILTER_BY_DISPLAY_VALUES } from '../../../constants/AppConstants';
+import './VideoDisplayHeader.less';
 
 export class VideoDisplayHeader extends Component {
   static propTypes = {
@@ -27,16 +28,15 @@ export class VideoDisplayHeader extends Component {
     }));
 
     return (
-      <div>
-        <div className="ytp-title-container">
-          <h2>Playlist Subscriptions</h2>
-          <div>
-            <div>
-              Show:&nbsp;&nbsp;
-              <ClickableDropdown
-                items={filterByItems}
-              />
-            </div>
+      <div className="ytp-VideoDisplayHeader">
+        <h2 className="ytp-VideoDisplayHeader-title">
+          <span>Playlist Subscriptions</span>
+        </h2>
+        <div className="ytp-VideoDisplayHeader-filter">
+          <div className="ytp-VideoDisplayHeader-filter-dropdown">
+            <ClickableDropdown
+              items={filterByItems}
+            />
           </div>
         </div>
       </div>

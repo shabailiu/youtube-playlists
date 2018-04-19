@@ -16,7 +16,10 @@ export class ClickableDropdownItem extends Component {
   render() {
     const { children } = this.props;
     return (
-      <div onClick={this.handleClick}>
+      <div
+        className="ytp-ClickableDropdownItem"
+        onClick={this.handleClick}
+      >
         {children}
       </div>
     )

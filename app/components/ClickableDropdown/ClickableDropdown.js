@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ClickableDropdownItem from './ClickableDropdownItem';
+import './ClickableDropdown.less';
 
 export class ClickableDropdown extends Component {
   static propTypes = {
@@ -23,7 +24,8 @@ export class ClickableDropdown extends Component {
     const selectedText = selectedItem && selectedItem.text;
 
     this.state = {
-      currSelected: selectedText || (props.items[0] && props.items[0].text) || null
+      currSelected: selectedText || (props.items[0] && props.items[0].text) || null,
+      showDropdown: false
     };
   }
 
@@ -32,15 +34,23 @@ export class ClickableDropdown extends Component {
 
     if (item) {
       this.setState({
-        currSelected: item.text
+        currSelected: item.text,
+        showDropdown: false
       });
       item && item.onClick(item.id);
     }
   };
 
+  toggleDropdown = event => {
+    event.preventDefault();
+    this.setState({
+      showDropdown: !this.state.showDropdown
+    });
+  };
+
   render() {
     const { items } = this.props;
-    const { currSelected } = this.state;
+    const { currSelected, showDropdown } = this.state;
     const menuItems = [];
 
     items.forEach(item => {
@@ -59,19 +69,25 @@ export class ClickableDropdown extends Component {
       );
     });
 
+    const selectedClass = showDropdown ? 'ytp-ClickableDropdown-selected-up' : 'ytp-ClickableDropdown-selected-down';
+
     return (
-      <button
-        type="button"
-        onClick={false}
-      >
-        <span className="yt-uix-button-content">
-          {currSelected}
-        </span>
-        <span className="yt-uix-button-arrow yt-sprite" />
-        <ul className=" yt-uix-button-menu yt-uix-button-menu-default hid" role="menu" aria-haspopup="true">
-          {menuItems}
-        </ul>
-      </button>
+      <div className="ytp-ClickableDropdown">
+        <button
+          type="button"
+          onClick={this.toggleDropdown}
+        >
+          <span className={selectedClass}>
+            {currSelected}
+          </span>
+        </button>
+
+        {showDropdown && (
+          <ul className="ytp-ClickableDropdown-items">
+            {menuItems}
+          </ul>
+        )}
+      </div>
     )
   }
 }

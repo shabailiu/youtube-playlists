@@ -1,0 +1,51 @@
+.ytp-ClickableDropdown {
+    position: relative;
+
+    button {
+        font-size: 1.3rem;
+        border: 0;
+        background: transparent;
+        padding: 0;
+        text-transform: uppercase;
+        font-weight: 500;
+        color: #444;
+        cursor: pointer;
+        outline: none;
+    }
+
+    .ytp-ClickableDropdown-items {
+        list-style: none;
+        padding: 0;
+        z-index: 100;
+        position: absolute;
+        right: 0;
+        color: #fff;
+        background: #333;
+        margin-top: 5px;
+        margin-bottom: 0;
+
+        li {
+            &:hover {
+                background: lighten(#333, 20%);
+            }
+        }
+    }
+
+    .ytp-ClickableDropdown-selected-down:after {
+        content: '▼';
+        font-size: 1.2rem;
+        padding-left: 5px;
+    }
+
+    .ytp-ClickableDropdown-selected-up:after {
+        content: '▲';
+        font-size: 1.2rem;
+        padding-left: 5px;
+    }
+
+    .ytp-ClickableDropdownItem {
+        cursor: pointer;
+        white-space: nowrap;
+        padding: 7px 10px;
+    }
+}

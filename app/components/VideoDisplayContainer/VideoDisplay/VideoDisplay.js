@@ -37,7 +37,7 @@ export class VideoDisplay extends Component {
     });
 
     return (
-      <div>
+      <div className="ytp-VideoDisplay">
         {videoArr}
       </div>
     );
