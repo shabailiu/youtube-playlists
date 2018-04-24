@@ -1,11 +1,18 @@
 import React from 'react';
 import { COMPONENT_TYPE } from '../../app/AppRoot';
 import * as RenderReactRoot from './utils/renderRoot';
-import { getPageType, isAJAXPageRequest, isPageLoaded, mapPageTypeToComponents, mapUrlToPageType } from './utils/ytHelper';
+import {
+  getPageType,
+  isAJAXPageResponse,
+  isPageLoaded,
+  mapPageTypeToComponents,
+  mapUrlToPageType,
+  PAGE_TYPE
+} from './utils/ytHelper';
 import { Store } from 'react-chrome-redux';
 import { MESSAGE_TYPE } from './constants';
 
-console.debug('[ytp] extension/inject loaded from:', location.href);
+console.debug('[ytp] extension/inject loaded from, executing script:', location.href);
 const maxLoops = 40;
 
 const executeScript = () => {
@@ -14,7 +21,11 @@ const executeScript = () => {
   });
 
   console.debug('[ytp] executing script');
-  RenderReactRoot.renderPlaylistContainer(store);
+
+  if (getPageType(window.location.href) === PAGE_TYPE.SUBSCRIPTION_HOME) {
+    console.debug('[ytp] rendering playlist container');
+    RenderReactRoot.renderPlaylistContainer(store);
+  }
 };
 
 const injectElementIntoPage = (componentType, store) => {
@@ -35,15 +46,16 @@ chrome.runtime.onMessage.addListener((message = {}, sender, sendResponse) => {
   const { type, payload } = message;
 
   switch (type) {
-    case MESSAGE_TYPE.EXECUTE_SCRIPT:
+    case MESSAGE_TYPE.EXECUTE_SCRIPT: //TODO do we still need this?
       if (payload) {
         console.debug('[ytp] bundle already loaded; executing script');
         executeScript();
       }
       break;
     case MESSAGE_TYPE.AJAX_RESPONSE:
-      if (isAJAXPageRequest(payload)) {
-        console.log('[ytp] got req ', message);
+      if (isAJAXPageResponse(payload)) {
+        console.log('[ytp] got res, executing script ', message);
+        executeScript();
       }
       break;
   }

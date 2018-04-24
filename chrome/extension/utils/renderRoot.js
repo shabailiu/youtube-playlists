@@ -5,9 +5,11 @@ import get from 'lodash/get';
 import isEmpty from 'lodash/isEmpty';
 
 export const renderPlaylistContainer = store => {
-  const eltToInject = document.querySelector('ytd-browse > ytd-two-column-browse-results-renderer > ytd-section-list-renderer > #contents');
+  const PLAYLIST_QUERY_SELECTOR = '#ytp';
+  const eltToInject = document.querySelector('ytd-browse > ytd-two-column-browse-results-renderer > ytd-section-list-renderer');
 
-  if (eltToInject) {
+  // Only inject if the element exists and there is no subscription container already
+  if (eltToInject && !document.querySelector(PLAYLIST_QUERY_SELECTOR)) {
     const reactRoot = document.createElement('div');
     reactRoot.id = 'ytp';
     eltToInject.insertBefore(reactRoot, eltToInject.firstChild);
@@ -18,7 +20,7 @@ export const renderPlaylistContainer = store => {
           store={store}
           type={COMPONENT_TYPE.PLAYLIST_CONTAINER}
         />,
-        document.querySelector('#ytp')
+        document.querySelector(PLAYLIST_QUERY_SELECTOR)
       );
     });
   }

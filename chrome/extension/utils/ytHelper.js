@@ -32,7 +32,6 @@ export const getPageType = url => {
 export const isPageLoaded = pageType => {
   switch (pageType) {
     case PAGE_TYPE.SUBSCRIPTION_HOME:
-      // return !!document.querySelector('#browse-items-primary > .section-list');
       return !!document.querySelector('ytd-two-column-browse-results-renderer ytd-section-list-renderer ytd-shelf-renderer');
     case PAGE_TYPE.USER_HOME:
       const homeTab = document.querySelector('#channel-navigation-menu .epic-nav-item-heading[aria-label="Home tab"]');
@@ -46,18 +45,19 @@ export const isPageLoaded = pageType => {
 };
 
 /**
- * Determine if an AJAX request URL is for a page load
+ * Determine if an AJAX response URL is for a page load
  */
-export const isAJAXPageRequest = request => {
+export const isAJAXPageResponse = response => {
   const invalidPaths = [
-    'service_ajax'
+    '_ajax',
+    'videos.xml'
   ];
 
   try {
-    const urlObj = new URL(request.url);
-    return request.type === 'xmlhttprequest' && !urlObj.pathname.match(invalidPaths.join('|'));
+    const urlObj = new URL(response.url);
+    return response.type === 'xmlhttprequest' && !urlObj.pathname.match(invalidPaths.join('|'));
   } catch (err) {
-    console.error(`[ytp] unable to parse URL (${request && request.url})`);
+    console.error(`[ytp] unable to parse URL (${response && response.url})`);
     return false;
   }
 };
