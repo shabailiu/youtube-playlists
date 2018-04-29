@@ -26,6 +26,8 @@ const executeScript = () => {
     console.debug('[ytp] rendering playlist container');
     RenderReactRoot.renderPlaylistContainer(store);
   }
+
+  RenderReactRoot.renderSubscriptionButtons(store);
 };
 
 const injectElementIntoPage = (componentType, store) => {

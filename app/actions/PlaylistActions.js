@@ -1,6 +1,7 @@
 import * as PlaylistAction from './constants/PlaylistActionConstants';
 import { parseRSSFeed } from '../utils/playlists';
 import { fetchingPlaylists } from './AppActions';
+import isEmpty from 'lodash/isEmpty';
 
 export const readFeedAndHydratePlaylist = (feedUrl, feedData = {}) => ({
   type: PlaylistAction.alias.READ_FEED_AND_HYDRATE_PLAYLIST,
@@ -13,7 +14,7 @@ export const readFeedAndHydratePlaylist = (feedUrl, feedData = {}) => ({
 const readFeedAndHydratePlaylistImpl = action => {
   let { feedUrl, feedData } = action.payload;
   return async (dispatch) => {
-    if (!feedData) {
+    if (isEmpty(feedData)) {
       try {
         feedData = await parseRSSFeed(feedUrl);
         feedData = feedData.feed;

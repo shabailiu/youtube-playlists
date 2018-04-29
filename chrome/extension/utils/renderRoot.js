@@ -27,10 +27,16 @@ export const renderPlaylistContainer = store => {
 };
 
 export const renderSubscriptionButtons = store => {
-  const eltsToInject = [...document.querySelectorAll('.yt-lockup-playlist .yt-lockup-thumbnail')]; //TODO put this in config
+  const BUTTON_QUERY_SELECTOR = '.ytp-sub-btn-root';
+  const eltsToInject = [...document.querySelectorAll('ytd-playlist-thumbnail')]; //TODO put this in config
   const reactRoots = [];
 
   eltsToInject.forEach(elt => {
+    // Don't inject if it already exists
+    if (elt.querySelector(BUTTON_QUERY_SELECTOR)) {
+      return;
+    }
+
     // Get the playlist ID from the anchor tag
     const anchor = elt.querySelector('a'); //TODO error handling
     if (!anchor) {

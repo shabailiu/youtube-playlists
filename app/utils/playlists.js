@@ -7,7 +7,10 @@ export const parseRSSFeed = async (feed) => {
   let feedsResponse;
 
   try {
-    feedsResponse = await axios.get(feed);
+    console.debug('[ytp] parsing feed: ' + feed);
+    feedsResponse = await axios.get(feed, {
+      timeout: 3000 //TODO config and UI warning
+    });
   } catch (err) {
     return Promise.reject(`Error reading feed (${feed}): ${err}`);
   }
@@ -34,7 +37,9 @@ export const parseRSSFeeds = async (feeds) => {
   const promises = [];
 
   feeds.forEach(feed => {
-    promises.push(axios.get(feed));
+    promises.push(axios.get(feed, {
+      timeout: 3000
+    }));
   });
 
   const feedsResponse = await Promise.all(promises);
