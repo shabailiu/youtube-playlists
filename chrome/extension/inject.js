@@ -1,19 +1,14 @@
 import React from 'react';
-import { COMPONENT_TYPE } from '../../app/AppRoot';
 import * as RenderReactRoot from './utils/renderRoot';
 import {
   getPageType,
   isAJAXPageResponse,
-  isPageLoaded,
-  mapPageTypeToComponents,
-  mapUrlToPageType,
   PAGE_TYPE
 } from './utils/ytHelper';
 import { Store } from 'react-chrome-redux';
 import { MESSAGE_TYPE } from './constants';
 
 console.debug('[ytp] extension/inject loaded from, executing script:', location.href);
-const maxLoops = 40;
 
 const executeScript = () => {
   const store = new Store({
@@ -23,23 +18,12 @@ const executeScript = () => {
   console.debug('[ytp] executing script');
 
   if (getPageType(window.location.href) === PAGE_TYPE.SUBSCRIPTION_HOME) {
-    console.debug('[ytp] rendering playlist container');
+    console.debug('[ytp] rendering playlist container', window.location.href);
     RenderReactRoot.renderPlaylistContainer(store);
   }
 
+  console.debug('[ytp] rendering sub buttons');
   RenderReactRoot.renderSubscriptionButtons(store);
-};
-
-const injectElementIntoPage = (componentType, store) => {
-  console.debug('[ytp] injecting element: ' + componentType);
-  switch (componentType) {
-    case COMPONENT_TYPE.PLAYLIST_CONTAINER:
-      return RenderReactRoot.renderPlaylistContainer(store);
-    case COMPONENT_TYPE.SUBSCRIPTION_BUTTON:
-      return RenderReactRoot.renderSubscriptionButtons(store);
-    case COMPONENT_TYPE.PROMINENT_SUBSCRIPTION_BUTTON:
-      return RenderReactRoot.renderProminentSubscriptionButton(store);
-  }
 };
 
 executeScript();

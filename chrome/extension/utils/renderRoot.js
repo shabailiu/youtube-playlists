@@ -6,10 +6,12 @@ import isEmpty from 'lodash/isEmpty';
 
 export const renderPlaylistContainer = store => {
   const PLAYLIST_QUERY_SELECTOR = '#ytp';
-  const eltToInject = document.querySelector('ytd-browse > ytd-two-column-browse-results-renderer > ytd-section-list-renderer');
+  // There can be multiple ytd-browse, but subscription home does not have a page-subtype attribute
+  const eltToInject = document.querySelector('ytd-browse:not([page-subtype]) > ytd-two-column-browse-results-renderer > ytd-section-list-renderer');
 
   // Only inject if the element exists and there is no subscription container already
   if (eltToInject && !document.querySelector(PLAYLIST_QUERY_SELECTOR)) {
+    console.debug('[ytp] injecting playlist into ', eltToInject);
     const reactRoot = document.createElement('div');
     reactRoot.id = 'ytp';
     eltToInject.insertBefore(reactRoot, eltToInject.firstChild);
@@ -23,6 +25,8 @@ export const renderPlaylistContainer = store => {
         document.querySelector(PLAYLIST_QUERY_SELECTOR)
       );
     });
+  } else {
+    console.debug('[ytp] not injecting; already exists', document.querySelector(PLAYLIST_QUERY_SELECTOR));
   }
 };
 
@@ -69,32 +73,5 @@ export const renderSubscriptionButtons = store => {
         elt
       );
     });
-  });
-};
-
-export const renderProminentSubscriptionButton = store => {
-  const plHeader = document.getElementById('pl-header');
-  const eltToInject = plHeader.querySelector('.pl-header-thumb');
-
-  if (!plHeader || !eltToInject) {
-    return;
-  }
-
-  const playlistId = get(plHeader, 'dataset.fullListId');
-
-  const reactRoot = document.createElement('div');
-  reactRoot.className = 'ytp-sub-btn-root';
-  reactRoot.dataset.playlistid = playlistId;
-  eltToInject.appendChild(reactRoot);
-
-  store.ready().then(() => {
-    ReactDOM.render(
-      <Root
-        store={store}
-        type={COMPONENT_TYPE.SUBSCRIPTION_BUTTON}
-        playlistId={playlistId}
-      />,
-      reactRoot
-    );
   });
 };

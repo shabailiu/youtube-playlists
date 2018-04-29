@@ -18,7 +18,7 @@ export class VideoDisplay extends Component {
     videos: []
   };
 
-  render() {
+  renderVideoDisplay = () => {
     const { playlists, videos } = this.props;
     const videoArr = [];
 
@@ -36,9 +36,13 @@ export class VideoDisplay extends Component {
       );
     });
 
+    return videoArr;
+  };
+
+  render() {
     return (
       <div className="ytp-VideoDisplay">
-        {videoArr}
+        {this.renderVideoDisplay()}
       </div>
     );
   }

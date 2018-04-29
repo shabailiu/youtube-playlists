@@ -28,6 +28,7 @@ export default class AppRoot extends Component {
         app = <PlaylistContainer {...rest} />;
         break;
       case COMPONENT_TYPE.SUBSCRIPTION_BUTTON:
+      case COMPONENT_TYPE.PROMINENT_SUBSCRIPTION_BUTTON:
         app = <SubscriptionButtonContainer {...rest} />;
         break;
     }

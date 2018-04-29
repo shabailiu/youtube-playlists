@@ -30,7 +30,7 @@ export class VideoDisplayContainer extends Component {
     // TODO: This is kinda hacky - this animates the initial render, but is very slow
     setTimeout(() => {
       this.setState({
-        height: document.getElementById('ytp-video-list').clientHeight
+        height: this.ref.clientHeight
       });
     }, 100);
 
@@ -41,34 +41,35 @@ export class VideoDisplayContainer extends Component {
     }, 600);
   }
 
+  setRef = ref => {
+    this.ref = ref;
+  };
+
   render() {
     const { playlists, filterBy, isFetching } = this.props;
     const videos = pickAllVideos(playlists);
     const filteredVideos = filterVideos(videos, 12, filterBy);
 
     const loadingScreen = (
-      <div className="ytp-loading-screen">
+      <div className="ytp-VideoDisplayContainer-loading">
         <LoadingIcon />
       </div>
     );
 
     return (
       <div
-        id="ytp-video-list-wrapper"
+        className="ytp-VideoDisplayContainer"
         style={{ height: this.state.height }}
+        ref={this.setRef}
       >
-        <div
-          id="ytp-video-list"
-        >
-          <VideoDisplayHeader />
-          {isFetching ? loadingScreen : (
-            <Collapse isOpened={true}>
-              <VideoDisplay
-                videos={filteredVideos}
-              />
-            </Collapse>
-          )}
-        </div>
+        <VideoDisplayHeader />
+        {isFetching ? loadingScreen : (
+          <Collapse isOpened={true}>
+            <VideoDisplay
+              videos={filteredVideos}
+            />
+          </Collapse>
+        )}
       </div>
     );
   }

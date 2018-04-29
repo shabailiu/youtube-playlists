@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import Button from 'material-ui/Button';
 import './SubscriptionButton.less';
 
 export class SubscriptionButton extends Component {
@@ -25,32 +26,34 @@ export class SubscriptionButton extends Component {
   };
 
   render() {
-    const { isSubscribed, playlistId } = this.props;
+    const { isSubscribed } = this.props;
     let button;
 
     if (isSubscribed) {
       button = (
-        <button
-          type="button"
+        <Button
+          className="ytp-SubscriptionButton-unsubscribe"
+          size="small"
+          variant="raised"
           onClick={this.unsubscribe}
-          data-playlistid={playlistId}
         >
           <span>
-            Unsubscribe
+            Subscribed
           </span>
-        </button>
+        </Button>
       );
     } else {
       button = (
-        <button
-          type="button"
+        <Button
+          className="ytp-SubscriptionButton-subscribe"
+          size="small"
+          variant="raised"
           onClick={this.subscribe}
-          data-playlistid={playlistId}
         >
           <span>
             Subscribe
           </span>
-        </button>
+        </Button>
       );
     }
 
