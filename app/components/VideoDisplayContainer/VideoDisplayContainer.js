@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import VideoDisplay from './VideoDisplay/VideoDisplay';
 import VideoDisplayHeader from './VideoDisplayHeader/VideoDisplayHeader';
 import { pickAllVideos } from '../../utils/playlists';
-import { Collapse } from 'react-collapse';
 import { filterVideos } from './VideoDisplay/VideoDisplayUtils';
 import { playlistShape } from '../../constants/PropTypeValidation';
 import './VideoDisplayContainer.less';
@@ -16,33 +15,6 @@ export class VideoDisplayContainer extends Component {
     filterBy: PropTypes.oneOf(Object.values(FILTER_BY)),
     isFetching: PropTypes.bool,
     playlists: PropTypes.objectOf(PropTypes.shape(playlistShape)).isRequired
-  };
-
-  constructor() {
-    super();
-
-    this.state = {
-      height: 0
-    };
-  }
-
-  componentDidMount() {
-    // TODO: This is kinda hacky - this animates the initial render, but is very slow
-    setTimeout(() => {
-      this.setState({
-        height: this.ref.clientHeight
-      });
-    }, 100);
-
-    setTimeout(() => {
-      this.setState({
-        height: 'auto'
-      });
-    }, 600);
-  }
-
-  setRef = ref => {
-    this.ref = ref;
   };
 
   render() {
@@ -59,16 +31,12 @@ export class VideoDisplayContainer extends Component {
     return (
       <div
         className="ytp-VideoDisplayContainer"
-        style={{ height: this.state.height }}
-        ref={this.setRef}
       >
         <VideoDisplayHeader />
         {isFetching ? loadingScreen : (
-          <Collapse isOpened={true}>
-            <VideoDisplay
-              videos={filteredVideos}
-            />
-          </Collapse>
+          <VideoDisplay
+            videos={filteredVideos}
+          />
         )}
       </div>
     );
@@ -81,6 +49,4 @@ const mapStateToProps = state => ({
   isFetching: state.app.isFetching
 });
 
-const mapDispatchToProps = dispatch => ({});
-
-export default connect(mapStateToProps, mapDispatchToProps)(VideoDisplayContainer);
+export default connect(mapStateToProps)(VideoDisplayContainer);

@@ -20,6 +20,7 @@ const readFeedAndHydratePlaylistImpl = action => {
         feedData = feedData.feed;
       } catch (err) {
         console.error('[ytp] Error in readFeedAndHydratePlaylist:', err);
+        throw new Error('Error in readFeedAndHydratePlaylist:' + err);
       }
     }
 
