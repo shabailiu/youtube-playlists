@@ -1,3 +1,5 @@
+@import '../../../styles/variables';
+
 .ytp-VideoDisplayHeader {
     display: flex;
     align-items: center;
@@ -6,6 +8,9 @@
     .ytp-VideoDisplayHeader-title {
         flex-grow: 1;
 
+        [dark] & {
+            color: @youtubeWhite--darkmode;
+        }
         span {
             font-size: 1.6rem;
             font-weight: 500;

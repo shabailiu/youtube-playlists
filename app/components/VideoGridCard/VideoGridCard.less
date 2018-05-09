@@ -1,3 +1,5 @@
+@import '../../styles/variables';
+
 .ytp-VideoGridCard {
     margin-right: 4px;
     display: inline-block;
@@ -26,6 +28,10 @@
         line-height: 1.6rem;
         color: #111;
         margin: 8px 0 8px;
+
+        [dark] & {
+            color: @youtubeWhite--darkmode;
+        }
     }
     .ytp-VideoGridCard-channel {
         a {
@@ -38,6 +44,13 @@
             &:hover {
                 color: lighten(#111, 10%);
             }
+            [dark] & {
+                color: #888;
+
+                &:hover {
+                    color: rgba(255, 255, 255, 0.74);
+                }
+            }
         }
     }
     .ytp-VideoGridCard-meta {
@@ -46,6 +59,9 @@
         line-height: 1.8rem;
         color: lighten(#111, 40%);
 
+        [dark] & {
+            color: #888;
+        }
         span:not(:last-of-type):after {
             content: '•';
             margin: 0 4px;
