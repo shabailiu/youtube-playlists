@@ -4,9 +4,8 @@ import rootReducer from '../reducers';
 import { alias } from 'react-chrome-redux';
 import aliases from '../actions/aliases';
 
-const middlewares = applyMiddleware(alias(aliases), thunk);
 const enhancer = compose(
-  middlewares
+  applyMiddleware(alias(aliases), thunk)
 );
 
 export default function (initialState) {

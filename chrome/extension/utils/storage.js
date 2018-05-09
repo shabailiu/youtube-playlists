@@ -11,6 +11,7 @@ export const saveStorage = storage => {
       [STATE_KEY]: storage
     }, () => {
       if (chrome.runtime.lastError) {
+        console.error('[ytp] Storage failed to save', chrome.runtime.lastError);
         reject(chrome.runtime.lastError);
       } else {
         console.log('[ytp] Storage saved', storage);
@@ -24,6 +25,7 @@ export const retrieveStorage = () => {
   return new Promise((resolve, reject) => {
     chrome.storage.sync.get(STATE_KEY, storage => {
       if (chrome.runtime.lastError) {
+        console.error('[ytp] Storage failed to retrieve', chrome.runtime.lastError);
         reject(chrome.runtime.lastError);
       } else {
         console.log('[ytp] Storage retrieved', storage[STATE_KEY]);
@@ -50,7 +52,11 @@ export const initializeStoreFromChromeStorage = async () => { //TODO i think thi
   const store = createStore(initialState);
 
   store.subscribe(throttle(async () => {
-    await saveStorage(transformStateForChromeStorage(store.getState()));
+    try {
+      await saveStorage(transformStateForChromeStorage(store.getState()));
+    } catch (err) {
+      // TODO: If saving failed, notify user
+    }
   }, 1000));
 
   wrapStore(store, { portName: 'MY_APP' });

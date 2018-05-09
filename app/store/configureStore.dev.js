@@ -1,3 +1,5 @@
+/* global module, require */
+
 import { applyMiddleware, createStore, compose } from 'redux';
 import thunk from 'redux-thunk';
 import rootReducer from '../reducers';
@@ -14,12 +16,6 @@ import { composeWithDevTools } from 'remote-redux-devtools';
 //   }) :
 //   compose;
 const composeEnhancers = composeWithDevTools; //http://remotedev.io/local/
-/* eslint-enable no-underscore-dangle */
-
-const debugMiddleware = () => next => action => {
-  console.log('debug', action);
-  return next(action);
-};
 
 const enhancer = composeEnhancers(
   applyMiddleware(alias(aliases), thunk, logger)
@@ -30,7 +26,7 @@ export default function (initialState) {
 
   if (module.hot) {
     module.hot.accept('../reducers', () => {
-      const nextRootReducer = require('../reducers');
+      const nextRootReducer = require('../reducers').default;
 
       store.replaceReducer(nextRootReducer);
     });
