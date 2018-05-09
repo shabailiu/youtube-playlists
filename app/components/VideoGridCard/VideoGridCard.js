@@ -30,6 +30,7 @@ export class VideoGridCard extends Component {
               alt=""
               src={thumbnailImg}
             />
+            <div className="ytp-VideoGridCard-thumbnail-hover" />
           </div>
           <div className="ytp-VideoGridCard-details">
             <h3 className="ytp-VideoGridCard-title">
