@@ -19,10 +19,12 @@ export class PlaylistContainer extends Component {
 
   render() {
     return (
-      <div className="style-scope ytd-section-list-renderer">
-        <div className="style-scope ytd-item-section-renderer">
-          <div className="style-scope ytd-shelf-renderer">
-            <VideoDisplayContainer />
+      <div className="ytd-PlaylistContainer">
+        <div className="style-scope ytd-section-list-renderer">
+          <div className="style-scope ytd-item-section-renderer">
+            <div className="style-scope ytd-shelf-renderer">
+              <VideoDisplayContainer />
+            </div>
           </div>
         </div>
       </div>

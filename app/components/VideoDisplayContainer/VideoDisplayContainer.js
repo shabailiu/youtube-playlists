@@ -9,6 +9,7 @@ import { playlistShape } from '../../constants/PropTypeValidation';
 import './VideoDisplayContainer.less';
 import LoadingIcon from '../LoadingIcon/LoadingIcon';
 import { FILTER_BY } from '../../constants/AppConstants';
+import { Collapse } from 'react-collapse';
 
 export class VideoDisplayContainer extends Component {
   static propTypes = {
@@ -29,16 +30,18 @@ export class VideoDisplayContainer extends Component {
     );
 
     return (
-      <div
-        className="ytp-VideoDisplayContainer"
-      >
-        <VideoDisplayHeader />
-        {isFetching ? loadingScreen : (
-          <VideoDisplay
-            videos={filteredVideos}
-          />
-        )}
-      </div>
+      <Collapse isOpened={true} forceInitialAnimation={true}>
+        <div
+          className="ytp-VideoDisplayContainer"
+        >
+          <VideoDisplayHeader />
+          {isFetching ? loadingScreen : (
+            <VideoDisplay
+              videos={filteredVideos}
+            />
+          )}
+        </div>
+      </Collapse>
     );
   }
 }
