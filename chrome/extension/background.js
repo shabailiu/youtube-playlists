@@ -1,4 +1,4 @@
-import { initializeStoreFromChromeStorage } from './utils/storage';
+import { initializeStoreFromChromeStorage } from './utils/storage/storage';
 const bluebird = require('bluebird');
 
 global.Promise = bluebird;
