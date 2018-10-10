@@ -22,6 +22,9 @@ const baseDevConfig = () => ({
     noInfo: true,
     headers: { 'Access-Control-Allow-Origin': '*' }
   },
+  devServer: {
+    hot: true
+  },
   hotMiddleware: {
     path: '/js/__webpack_hmr'
   },
@@ -30,12 +33,9 @@ const baseDevConfig = () => ({
     filename: '[name].bundle.js',
     chunkFilename: '[id].chunk.js'
   },
-  postcss() {
-    return postCSSConfig;
-  },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin(),
+    new webpack.NoEmitOnErrorsPlugin(),
     new webpack.IgnorePlugin(/[^/]+\/[\S]+.prod$/),
     new webpack.DefinePlugin({
       __HOST__: `'${host}'`,
@@ -46,30 +46,29 @@ const baseDevConfig = () => ({
     })
   ],
   resolve: {
-    extensions: ['', '.js']
+    extensions: ['.js']
   },
   module: {
-    loaders: [{
+    rules: [{
       test: /\.js$/,
-      loader: 'babel',
-      exclude: /node_modules/,
-      query: {
-        presets: ['react-hmre']
-      }
+      use: {
+        loader: 'babel-loader'
+      },
+      exclude: /node_modules/
     }, {
       test: /\.css$/,
-      loaders: [
-        'style',
-        'css',
-        'postcss'
+      use: [
+        'style-loader',
+        { loader: 'css-loader', options: { importLoaders: 1 } },
+        'postcss-loader'
       ]
     }, {
       test: /\.less$/,
-      loaders: [
-        'style',
-        'css',
-        'postcss',
-        'less'
+      use: [
+        'style-loader',
+        { loader: 'css-loader', options: { importLoaders: 1 } },
+        'postcss-loader',
+        'less-loader'
       ]
     }]
   }

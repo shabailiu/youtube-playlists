@@ -51,8 +51,7 @@ export class ConfigContainer extends Component {
               onChange={this.handleClickTab}
               fullWidth
               centered
-              indicatorColor="inherit"
-              textColor="inherit"
+              indicatorColor="primary"
             >
               <Tab icon={<SubscriptionIcon />} />
               <Tab icon={<SettingsIcon />} />

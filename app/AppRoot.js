@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Provider } from 'react-redux';
+import { hot } from 'react-hot-loader'
 import PlaylistContainer from './components/PlaylistContainer/PlaylistContainer';
 import SubscriptionButtonContainer from './components/SubscriptionButtonContainer/SubscriptionButtonContainer';
-// import 'semantic-ui-css/semantic.min.css';
 
 export const COMPONENT_TYPE = {
   PLAYLIST_CONTAINER: 'PLAYLIST_CONTAINER',
@@ -11,7 +11,7 @@ export const COMPONENT_TYPE = {
   PROMINENT_SUBSCRIPTION_BUTTON: 'PROMINENT_SUBSCRIPTION_BUTTON'
 };
 
-export default class AppRoot extends Component {
+export class AppRoot extends Component {
   static propTypes = {
     store: PropTypes.object.isRequired,
     type: PropTypes.oneOf(Object.values(COMPONENT_TYPE)).isRequired
@@ -40,3 +40,5 @@ export default class AppRoot extends Component {
     );
   }
 }
+
+export default hot(module)(AppRoot);

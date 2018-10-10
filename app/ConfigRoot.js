@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect, Provider } from 'react-redux';
+import { hot } from 'react-hot-loader'
 import ConfigContainer from './components/ConfigContainer/ConfigContainer';
 import { playlistShape } from './constants/PropTypeValidation';
 import { readFeedAndHydrateAllPlaylists } from './actions/PlaylistActions';
@@ -52,4 +53,4 @@ const mapDispatchToProps = dispatch => ({
   }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ConfigRoot);
+export default hot(module)(connect(mapStateToProps, mapDispatchToProps)(ConfigRoot));
